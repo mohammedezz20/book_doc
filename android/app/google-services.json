@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "41199169010",
+    "project_id": "book-doc-b9236",
+    "storage_bucket": "book-doc-b9236.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41199169010:android:0b1f502b395e0c44b2cf6b",
+        "android_client_info": {
+          "package_name": "com.example.book_doc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBml9Zk--6epccuFB_DI-_4k_ef_QU28c8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
