@@ -1,5 +1,6 @@
 import 'package:book_doc/login/domain/usecases/auth_usecase.dart';
 import 'package:book_doc/login/presentation/cubit/login_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,7 @@ class LoginCubit extends Cubit<LoginStates> {
   TextEditingController passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool isObscure = true;
-
+  var user = 'gg';
   void showPassword() {
     isObscure = !isObscure;
     emit(ShowPasswordState());
@@ -30,6 +31,17 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(LoginSuccessState());
     } else {
       emit(LoginErrorState(errorMessage: 'wrong password or email'));
+    }
+  }
+
+  signInWithGoogle() async {
+    emit(LoginLoadingState());
+    UserCredential? response = await _authUseCase.signInWithGoogle();
+    if (response != null) {
+      user = response.user!.displayName!;
+      emit(LoginSuccessState());
+    } else {
+      emit(LoginErrorState(errorMessage: 'something went wrong'));
     }
   }
 }
