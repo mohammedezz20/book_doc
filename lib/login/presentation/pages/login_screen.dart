@@ -1,3 +1,4 @@
+import 'package:book_doc/core/assets/vectors/vectors.dart';
 import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
@@ -10,8 +11,10 @@ import 'package:book_doc/login/presentation/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/theme/app_fonts.dart';
+import '../widgets/sign_in_divider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -111,7 +114,15 @@ class LoginScreen extends StatelessWidget {
                               }
                             },
                           ),
-                    verticalSpace(100),
+                    verticalSpace(40),
+                    const SignInDivider(),
+                    verticalSpace(40),
+                    GestureDetector(
+                        onTap: () {
+                          cubit.signInWithGoogle();
+                        },
+                        child: SvgPicture.asset(AppVector.google)),
+                    verticalSpace(40),
                     const TermsAndConditionsText(),
                     verticalSpace(25),
                     const AlreadyHaveAccount(),
