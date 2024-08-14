@@ -1,4 +1,5 @@
 import 'package:book_doc/core/helpers/spacing.dart';
+import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
 import 'package:book_doc/login/presentation/cubit/login_cubit.dart';
@@ -26,7 +27,31 @@ class LoginScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
             child: BlocConsumer<LoginCubit, LoginStates>(
               listener: (context, state) {
-                // TODO: implement listener
+                if (state is LoginErrorState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.errorMessage),
+                    ),
+                  );
+                } else if (state is LoginSuccessState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Signed in successfully'),
+                    ),
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Scaffold(
+                        body: Center(
+                          child: Text('Home Screen'),
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  const Center(child: CircularProgressIndicator());
+                }
               },
               builder: (context, state) => Form(
                 key: cubit.formKey,
@@ -38,12 +63,20 @@ class LoginScreen extends StatelessWidget {
                     AppTextFormField(
                         controller: cubit.emailController,
                         hintText: 'Email',
-                        validator: (value) {}),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a valid email!';
+                          }
+                        }),
                     verticalSpace(16),
                     AppTextFormField(
                       controller: cubit.passwordController,
                       hintText: 'Password',
-                      validator: (value) {},
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a valid password!';
+                        }
+                      },
                       isObscureText: cubit.isObscure,
                       suffixIcon: IconButton(
                           onPressed: () {
@@ -65,11 +98,19 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     verticalSpace(30),
-                    AppTextButton(
-                      buttonText: 'Login',
-                      textStyle: TextStyles.font16WhiteSemiBold,
-                      onPressed: () {},
-                    ),
+                    state is LoginLoadingState
+                        ? const CircularProgressIndicator(
+                            color: ColorsManager.mainBlue,
+                          )
+                        : AppTextButton(
+                            buttonText: 'Login',
+                            textStyle: TextStyles.font16WhiteSemiBold,
+                            onPressed: () {
+                              if (cubit.formKey.currentState!.validate()) {
+                                cubit.login();
+                              }
+                            },
+                          ),
                     verticalSpace(100),
                     const TermsAndConditionsText(),
                     verticalSpace(25),
