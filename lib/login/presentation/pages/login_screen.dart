@@ -86,8 +86,8 @@ class LoginScreen extends StatelessWidget {
                             cubit.showPassword();
                           },
                           icon: !cubit.isObscure
-                              ? const Icon(Icons.visibility_off)
-                              : const Icon(Icons.visibility)),
+                              ? const Icon(Icons.visibility_off_outlined)
+                              : const Icon(Icons.visibility_outlined)),
                     ),
                     verticalSpace(16),
                     Align(
