@@ -1,11 +1,11 @@
-import 'package:book_doc/login/domain/usecases/auth_usecase.dart';
-import 'package:book_doc/login/presentation/cubit/login_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/di/service_locator.dart';
+import '../../../../../core/di/service_locator.dart';
+import '../../../domain/usecases/auth_usecase.dart';
+import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitialState());

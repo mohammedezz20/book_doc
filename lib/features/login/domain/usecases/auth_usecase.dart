@@ -1,7 +1,8 @@
-import 'package:book_doc/login/domain/repository/auth_repository.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../core/di/service_locator.dart';
+import '../../../../core/di/service_locator.dart';
+import '../repository/auth_repository.dart';
 
 class AuthUseCase {
   final _authRepository = sl.get<AuthRepository>();
@@ -12,5 +13,9 @@ class AuthUseCase {
 
   Future<UserCredential?> signInWithGoogle() {
     return _authRepository.signInWithGoogle();
+  }
+
+  Future<Either<String, UserCredential>> signUp(String email, String password) {
+    return _authRepository.signUp(email, password);
   }
 }
