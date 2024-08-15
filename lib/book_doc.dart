@@ -1,9 +1,8 @@
+import 'package:book_doc/features/login/presentation/cubit/signup/sign_up_cubit.dart';
+import 'package:book_doc/features/login/presentation/pages/signup/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'features/login/presentation/cubit/login/login_cubit.dart';
-import 'features/login/presentation/pages/login/login_screen.dart';
 
 class BookDoc extends StatelessWidget {
   const BookDoc({super.key});
@@ -16,11 +15,9 @@ class BookDoc extends StatelessWidget {
       child: MaterialApp(
         title: 'Book Doc',
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: BlocProvider(
-            create: (context) => LoginCubit(),
-            child: const LoginScreen(),
-          ),
+        home: BlocProvider(
+          create: (context) => SignUpCubit(),
+          child: const SignUpScreen(),
         ),
       ),
     );
