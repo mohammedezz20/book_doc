@@ -1,4 +1,6 @@
 import 'package:book_doc/core/helpers/spacing.dart';
+import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
+import 'package:book_doc/features/profile/presentation/pages/complete-profile/fill_your_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -122,6 +124,18 @@ class SignUpScreen extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Account created successfully!'),
+                ),
+              );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => CompleteProfileCubit(),
+                    child: FillYourProfile(
+                      email: cubit.emailController.text,
+                      password: cubit.passwordController.text,
+                    ),
+                  ),
                 ),
               );
             } else if (state is SignUpErrorState) {

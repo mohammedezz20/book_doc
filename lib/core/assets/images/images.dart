@@ -1,3 +1,3 @@
-class AppImage {
-  static String google = 'assets/images/google.png';
+class AppImages {
+  static String profile = 'assets/images/profile.png';
 }
