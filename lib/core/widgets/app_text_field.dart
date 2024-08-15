@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
 
@@ -15,6 +17,10 @@ class AppTextFormField extends StatelessWidget {
   final Color? backgroundColor;
   final TextEditingController? controller;
   final Function(String?) validator;
+  final Function(String)? onChanged;
+  final TextAlign? textAlign;
+  final List<TextInputFormatter>? inputFormatters;
+  final void Function(PointerDownEvent)? onTapOutside;
 
   const AppTextFormField({
     super.key,
@@ -29,6 +35,10 @@ class AppTextFormField extends StatelessWidget {
     this.backgroundColor,
     this.controller,
     required this.validator,
+    this.onChanged,
+    this.textAlign,
+    this.inputFormatters,
+    this.onTapOutside,
   });
 
   @override
@@ -80,6 +90,12 @@ class AppTextFormField extends StatelessWidget {
       validator: (value) {
         return validator(value);
       },
+      onChanged: (value) {
+        onChanged ?? (value) {};
+      },
+      textAlign: textAlign ?? TextAlign.start,
+      inputFormatters: inputFormatters,
+      onTapOutside: onTapOutside,
     );
   }
 }

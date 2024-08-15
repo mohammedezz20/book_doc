@@ -3,18 +3,18 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
-import 'package:book_doc/login/presentation/cubit/login_cubit.dart';
-import 'package:book_doc/login/presentation/cubit/login_state.dart';
-import 'package:book_doc/login/presentation/widgets/already_have_account.dart';
-import 'package:book_doc/login/presentation/widgets/terms&conditons_text.dart';
-import 'package:book_doc/login/presentation/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/theme/app_fonts.dart';
-import '../widgets/sign_in_divider.dart';
+import '../../../../../core/theme/app_fonts.dart';
+import '../../cubit/login/login_cubit.dart';
+import '../../cubit/login/login_state.dart';
+import '../../widgets/dont_have_account_text.dart';
+import '../../widgets/sign_in_divider.dart';
+import '../../widgets/terms&conditons_text.dart';
+import '../../widgets/welcome_text.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -64,13 +64,17 @@ class LoginScreen extends StatelessWidget {
                     const WelcomeText(),
                     verticalSpace(40),
                     AppTextFormField(
-                        controller: cubit.emailController,
-                        hintText: 'Email',
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a valid email!';
-                          }
-                        }),
+                      controller: cubit.emailController,
+                      hintText: 'Email',
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a valid email!';
+                        }
+                      },
+                      onTapOutside: (p0) {
+                        FocusScope.of(context).unfocus();
+                      },
+                    ),
                     verticalSpace(16),
                     AppTextFormField(
                       controller: cubit.passwordController,
@@ -79,6 +83,9 @@ class LoginScreen extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Please enter a valid password!';
                         }
+                      },
+                      onTapOutside: (p0) {
+                        FocusScope.of(context).unfocus();
                       },
                       isObscureText: cubit.isObscure,
                       suffixIcon: IconButton(
@@ -125,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                     verticalSpace(40),
                     const TermsAndConditionsText(),
                     verticalSpace(25),
-                    const AlreadyHaveAccount(),
+                    const DontHaveAccountText(),
                   ],
                 ),
               ),
