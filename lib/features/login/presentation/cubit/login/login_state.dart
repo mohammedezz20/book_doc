@@ -12,3 +12,21 @@ class LoginErrorState extends LoginStates {
 class LoginLoadingState extends LoginStates {}
 
 class ShowPasswordState extends LoginStates {}
+
+class ForgetPasswordLoadingState extends LoginStates {}
+
+class SubmitPasswordResetSuccessState extends LoginStates {}
+
+class SubmitPasswordResetErrorState extends LoginStates {
+  String errorMessage;
+
+  SubmitPasswordResetErrorState({required this.errorMessage});
+}
+
+class VerifyCodeSuccessState extends LoginStates {}
+
+class VerifyCodeErrorState extends LoginStates {
+  String errorMessage;
+
+  VerifyCodeErrorState({required this.errorMessage});
+}

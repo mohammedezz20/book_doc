@@ -3,6 +3,7 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
+import 'package:book_doc/features/login/presentation/pages/forget-password/forget_password_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,7 +103,17 @@ class LoginScreen extends StatelessWidget {
                     Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) => LoginCubit(),
+                                child: const ForgetPasswordScreen(),
+                              ),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Forget Password?',
                           style: TextStyles.font13BlueRegular,
