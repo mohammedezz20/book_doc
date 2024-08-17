@@ -18,4 +18,8 @@ class AuthUseCase {
   Future<Either<String, UserCredential>> signUp(String email, String password) {
     return _authRepository.signUp(email, password);
   }
+
+  Future<String> forgetPassword(String email) {
+    return _authRepository.forgetPassword(email);
+  }
 }
