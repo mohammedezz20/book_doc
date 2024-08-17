@@ -33,9 +33,13 @@ class ProfileFirebaseImpl implements ProfileFirebase {
   Future<String> addUserToFireStore(MyUserDTO user) async {
     try {
       final credential = FirebaseAuth.instance.currentUser;
+      await credential!.updateDisplayName(user.fullName);
+      await credential.updatePhotoURL(user.imageUrl);
+
+      user.id = credential.uid;
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(credential!.uid)
+          .doc(credential.uid)
           .set(user.toJson());
       return "success";
     } catch (e) {
