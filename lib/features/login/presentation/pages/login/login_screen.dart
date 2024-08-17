@@ -3,8 +3,8 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
+import 'package:book_doc/features/app-layout/presentation/pages/layout_providers.dart';
 import 'package:book_doc/features/login/presentation/pages/forget-password/forget_password_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,34 +31,6 @@ class LoginScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
             child: BlocConsumer<LoginCubit, LoginStates>(
-              listener: (context, state) {
-                if (state is LoginErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.errorMessage),
-                    ),
-                  );
-                } else if (state is LoginSuccessState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Signed in successfully'),
-                    ),
-                  );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        body: Center(
-                          child: Text(
-                              'Home Screen ${FirebaseAuth.instance.currentUser?.displayName}'),
-                        ),
-                      ),
-                    ),
-                  );
-                } else {
-                  const Center(child: CircularProgressIndicator());
-                }
-              },
               builder: (context, state) => Form(
                 key: cubit.formKey,
                 child: Column(
@@ -107,10 +79,8 @@ class LoginScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (context) => LoginCubit(),
-                                child: const ForgetPasswordScreen(),
-                              ),
+                              builder: (context) =>
+                                  const ForgetPasswordScreen(),
                             ),
                           );
                         },
@@ -149,6 +119,29 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              listener: (context, state) {
+                if (state is LoginErrorState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.errorMessage),
+                    ),
+                  );
+                } else if (state is LoginSuccessState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Signed in successfully'),
+                    ),
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LayoutProviders(),
+                    ),
+                  );
+                } else {
+                  const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
         ),
