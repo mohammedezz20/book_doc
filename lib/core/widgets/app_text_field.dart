@@ -21,7 +21,7 @@ class AppTextFormField extends StatelessWidget {
   final TextAlign? textAlign;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(PointerDownEvent)? onTapOutside;
-
+  final TextInputType? keyboardType;
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -39,6 +39,7 @@ class AppTextFormField extends StatelessWidget {
     this.textAlign,
     this.inputFormatters,
     this.onTapOutside,
+    this.keyboardType,
   });
 
   @override
@@ -96,6 +97,7 @@ class AppTextFormField extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.start,
       inputFormatters: inputFormatters,
       onTapOutside: onTapOutside,
+      keyboardType: keyboardType ?? TextInputType.text,
     );
   }
 }

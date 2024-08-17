@@ -2,6 +2,7 @@ import 'package:book_doc/features/profile/domain/entities/user.dart';
 
 class MyUserDTO extends MyUser {
   MyUserDTO({
+    super.id,
     required super.fullName,
     required super.email,
     required super.password,
@@ -14,6 +15,7 @@ class MyUserDTO extends MyUser {
 
   factory MyUserDTO.fromJson(Map<String, dynamic> json) {
     return MyUserDTO(
+      id: json['id'],
       fullName: json['fullName'],
       email: json['email'],
       password: json['password'],
@@ -27,6 +29,7 @@ class MyUserDTO extends MyUser {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'fullName': fullName,
       'email': email,
       'password': password,

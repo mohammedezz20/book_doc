@@ -120,6 +120,7 @@ class FillYourProfile extends StatelessWidget {
                       verticalSpace(16),
                       AppTextFormField(
                         controller: cubit.ageController,
+                        keyboardType: TextInputType.number,
                         hintText: 'Age',
                         validator: (value) {
                           if (value!.isEmpty) {
