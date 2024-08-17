@@ -1,6 +1,4 @@
-import 'package:book_doc/features/login/presentation/cubit/login/login_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theme/app_fonts.dart';
 import '../pages/login/login_screen.dart';
@@ -22,10 +20,7 @@ class AlreadyHaveAccount extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => BlocProvider(
-                  create: (context) => LoginCubit(),
-                  child: const LoginScreen(),
-                ),
+                builder: (context) => const LoginScreen(),
               ),
             );
           },
