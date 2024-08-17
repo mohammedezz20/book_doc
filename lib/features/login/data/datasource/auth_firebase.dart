@@ -10,6 +10,8 @@ abstract class AuthFirebase {
   Future<UserCredential?> signInWithGoogle();
 
   Future<Either<String, UserCredential>> signUp(String email, String password);
+
+  Future<String> forgetPassword(String email);
 }
 
 class AuthFirebaseImpl implements AuthFirebase {
@@ -77,5 +79,18 @@ class AuthFirebaseImpl implements AuthFirebase {
       }
     }
     return Left(message);
+  }
+
+  @override
+  Future<String> forgetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: email,
+      );
+      return 'success';
+    } catch (e) {
+      log('Error sending password reset email: $e');
+      return 'error';
+    }
   }
 }

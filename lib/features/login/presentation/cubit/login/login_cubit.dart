@@ -44,4 +44,14 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(LoginErrorState(errorMessage: 'something went wrong'));
     }
   }
+
+  forgetPassword() async {
+    emit(ForgetPasswordLoadingState());
+    String response = await _authUseCase.forgetPassword(emailController.text);
+    if (response == 'success') {
+      emit(SubmitPasswordResetSuccessState());
+    } else {
+      emit(SubmitPasswordResetErrorState(errorMessage: 'Email not found'));
+    }
+  }
 }

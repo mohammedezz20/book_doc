@@ -21,4 +21,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<String, UserCredential>> signUp(String email, String password) {
     return _authFirebase.signUp(email, password);
   }
+
+  @override
+  Future<String> forgetPassword(String email) {
+    return _authFirebase.forgetPassword(email);
+  }
 }
