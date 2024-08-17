@@ -40,8 +40,13 @@ class SignUpScreen extends StatelessWidget {
                         controller: cubit.emailController,
                         hintText: 'Email',
                         validator: (value) {
-                          if (value!.isEmpty) {
+                          if (value == null || value.isEmpty) {
                             return 'Please enter a valid email!';
+                          }
+                          RegExp emailRegex = RegExp(
+                              r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+                          if (!emailRegex.hasMatch(value)) {
+                            return 'Email should be like a9H5x@example.com';
                           }
                         },
                         onTapOutside: (p0) {
@@ -55,6 +60,8 @@ class SignUpScreen extends StatelessWidget {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a valid password!';
+                          } else if (value.length < 8) {
+                            return 'Password should be at least 8 characters';
                           }
                         },
                         onTapOutside: (p0) {
