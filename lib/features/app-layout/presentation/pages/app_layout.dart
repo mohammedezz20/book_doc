@@ -14,6 +14,7 @@ class AppLayout extends StatelessWidget {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
+            backgroundColor: Colors.white,
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Colors.white,
               selectedItemColor: ColorsManager.darkBlue,
