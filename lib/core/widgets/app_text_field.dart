@@ -21,7 +21,7 @@ class AppTextFormField extends StatelessWidget {
   final TextAlign? textAlign;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(PointerDownEvent)? onTapOutside;
-
+  final TextInputType? keyboardType;
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -39,6 +39,7 @@ class AppTextFormField extends StatelessWidget {
     this.textAlign,
     this.inputFormatters,
     this.onTapOutside,
+    this.keyboardType,
   });
 
   @override
@@ -51,33 +52,33 @@ class AppTextFormField extends StatelessWidget {
             EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
-              borderSide: const BorderSide(
+              borderSide: BorderSide(
                 color: ColorsManager.mainBlue,
-                width: 1.3,
+                width: 1.3.w,
               ),
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: BorderRadius.circular(16.0.r),
             ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
-              borderSide: const BorderSide(
+              borderSide: BorderSide(
                 color: ColorsManager.lighterGray,
-                width: 1.3,
+                width: 1.3.w,
               ),
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: BorderRadius.circular(16.0.r),
             ),
         errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
+          borderSide: BorderSide(
             color: Colors.red,
-            width: 1.3,
+            width: 1.3.w,
           ),
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(16.0.r),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
+          borderSide: BorderSide(
             color: Colors.red,
-            width: 1.3,
+            width: 1.3.w,
           ),
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(16.0.r),
         ),
         hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: hintText,
@@ -96,6 +97,7 @@ class AppTextFormField extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.start,
       inputFormatters: inputFormatters,
       onTapOutside: onTapOutside,
+      keyboardType: keyboardType ?? TextInputType.text,
     );
   }
 }

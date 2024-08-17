@@ -3,6 +3,7 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,9 +46,10 @@ class LoginScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Scaffold(
+                      builder: (context) => Scaffold(
                         body: Center(
-                          child: Text('Home Screen'),
+                          child: Text(
+                              'Home Screen ${FirebaseAuth.instance.currentUser?.displayName}'),
                         ),
                       ),
                     ),

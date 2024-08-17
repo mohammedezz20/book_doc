@@ -1,4 +1,6 @@
 import 'package:book_doc/core/helpers/spacing.dart';
+import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
+import 'package:book_doc/features/profile/presentation/pages/complete-profile/fill_your_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,8 +40,13 @@ class SignUpScreen extends StatelessWidget {
                         controller: cubit.emailController,
                         hintText: 'Email',
                         validator: (value) {
-                          if (value!.isEmpty) {
+                          if (value == null || value.isEmpty) {
                             return 'Please enter a valid email!';
+                          }
+                          RegExp emailRegex = RegExp(
+                              r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+                          if (!emailRegex.hasMatch(value)) {
+                            return 'Email should be like a9H5x@example.com';
                           }
                         },
                         onTapOutside: (p0) {
@@ -53,6 +60,8 @@ class SignUpScreen extends StatelessWidget {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a valid password!';
+                          } else if (value.length < 8) {
+                            return 'Password should be at least 8 characters';
                           }
                         },
                         onTapOutside: (p0) {
@@ -122,6 +131,18 @@ class SignUpScreen extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Account created successfully!'),
+                ),
+              );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => CompleteProfileCubit(),
+                    child: FillYourProfile(
+                      email: cubit.emailController.text,
+                      password: cubit.passwordController.text,
+                    ),
+                  ),
                 ),
               );
             } else if (state is SignUpErrorState) {
