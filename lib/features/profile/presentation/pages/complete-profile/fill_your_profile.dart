@@ -4,6 +4,7 @@ import 'package:book_doc/core/assets/images/images.dart';
 import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/phone_text_field.dart';
+import 'package:book_doc/features/app-layout/presentation/pages/layout_providers.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_state.dart';
 import 'package:book_doc/features/profile/presentation/widgets/fill_your_profile_text.dart';
@@ -184,11 +185,7 @@ class FillYourProfile extends StatelessWidget {
             if (state is CompleteProfileSuccessState) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => const Scaffold(
-                    body: Center(
-                      child: Text('Profile Created Successfully'),
-                    ),
-                  ),
+                  builder: (context) => const LayoutProviders(),
                 ),
               );
             } else if (state is CompleteProfileErrorState) {
