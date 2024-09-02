@@ -8,4 +8,6 @@ class AppImages {
   static String neurologyCategory = 'assets/images/neurology.png';
   static String nephrologyCategory = 'assets/images/nephrology.png';
   static String pediatricsCategory = 'assets/images/pediatrics.png';
+  static String cardioCategory = 'assets/images/cardio.png';
+  static String whatsapp = 'assets/images/whatsapp.png';
 }
