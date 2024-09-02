@@ -8,6 +8,7 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theme/app_fonts.dart';
 import '../manager/home_state.dart';
 import '../widgets/doctor_card.dart';
+import 'doctor_details_screen.dart';
 
 class RecommendationDoctorScreen extends StatelessWidget {
   const RecommendationDoctorScreen({super.key});
@@ -48,8 +49,20 @@ class RecommendationDoctorScreen extends StatelessWidget {
                     verticalSpace(20),
                     Expanded(
                       child: ListView.separated(
-                          itemBuilder: (context, index) => DoctorCard(
-                                doctor: cubit.doctorsList[index],
+                          itemBuilder: (context, index) => GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DoctorDetailsScreen(
+                                        doctor: cubit.doctorsList[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: DoctorCard(
+                                  doctor: cubit.doctorsList[index],
+                                ),
                               ),
                           separatorBuilder: (context, index) =>
                               verticalSpace(10),
