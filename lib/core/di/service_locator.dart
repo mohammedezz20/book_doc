@@ -1,3 +1,8 @@
+import 'package:book_doc/features/home/data/data_sources/home_firebase.dart';
+import 'package:book_doc/features/home/data/repositories/home_repository_impl.dart';
+import 'package:book_doc/features/home/domain/repositories/home_repository.dart';
+import 'package:book_doc/features/home/domain/use_cases/home_useCases.dart';
+import 'package:book_doc/features/home/presentation/manager/home_cubit.dart';
 import 'package:book_doc/features/login/presentation/cubit/signup/sign_up_cubit.dart';
 import 'package:book_doc/features/profile/domain/use_cases/profile_usecase.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
@@ -27,4 +32,10 @@ void setUpServiceLocator() {
   sl.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl());
   sl.registerFactory(() => ProfileUseCases());
   sl.registerFactory(() => CompleteProfileCubit());
+
+  //! Home
+  sl.registerLazySingleton<HomeFirebase>(() => HomeFirebaseImpl());
+  sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl());
+  sl.registerFactory(() => HomeUseCases());
+  sl.registerFactory(() => HomeCubit());
 }

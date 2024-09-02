@@ -13,20 +13,24 @@ class AppLayout extends StatelessWidget {
     var cubit = AppLayoutCubit.get(context);
     return BlocBuilder<AppLayoutCubit, AppLayoutStates>(
       builder: (context, state) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            bottomNavigationBar: BottomNavigationBar(
+        return Container(
+          color: Colors.white,
+          child: SafeArea(
+            child: Scaffold(
               backgroundColor: Colors.white,
-              selectedItemColor: ColorsManager.darkBlue,
-              unselectedItemColor: ColorsManager.darkBlue,
-              items: cubit.bottomNavItems,
-              onTap: cubit.changeSelectedIndex,
-              currentIndex: cubit.selectedIndex,
+              bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: Colors.white,
+                selectedItemColor: ColorsManager.darkBlue,
+                unselectedItemColor: ColorsManager.darkBlue,
+                items: cubit.bottomNavItems,
+                onTap: cubit.changeSelectedIndex,
+                currentIndex: cubit.selectedIndex,
+              ),
+              body: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  child: cubit.screens[cubit.selectedIndex]),
             ),
-            body: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                child: cubit.screens[cubit.selectedIndex]),
           ),
         );
       },
