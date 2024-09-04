@@ -1,12 +1,12 @@
 import 'package:book_doc/core/widgets/app_text_field.dart';
-import 'package:book_doc/features/home/presentation/manager/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theme/app_fonts.dart';
-import '../manager/home_state.dart';
+import '../cubit/home/home_cubit.dart';
+import '../cubit/home/home_state.dart';
 import '../widgets/doctor_card.dart';
 import 'doctor_details_screen.dart';
 
@@ -24,7 +24,7 @@ class RecommendationDoctorScreen extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 title: Text(
-                  'Recommendation Doctor',
+                  'Recommended Doctors',
                   style: TextStyles.font18DarkBlueBold,
                 ),
                 centerTitle: true,

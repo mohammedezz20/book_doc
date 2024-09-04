@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../manager/home_cubit.dart';
-import '../manager/home_state.dart';
+import '../cubit/home/home_cubit.dart';
+import '../cubit/home/home_state.dart';
 import '../widgets/category_list.dart';
 
 class HomeScreen extends StatelessWidget {
