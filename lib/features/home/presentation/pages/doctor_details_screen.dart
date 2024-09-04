@@ -1,5 +1,6 @@
 import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
+import 'package:book_doc/features/home/presentation/pages/book_appointment_screen.dart';
 import 'package:book_doc/features/home/presentation/widgets/about_me_widget.dart';
 import 'package:book_doc/features/home/presentation/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,12 @@ class DoctorDetailsScreen extends StatelessWidget {
               AppTextButton(
                 buttonText: 'Make An Appointment',
                 textStyle: TextStyles.font16WhiteSemiBold,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BookAppointmentScreen()));
+                },
               ),
             ],
           ),

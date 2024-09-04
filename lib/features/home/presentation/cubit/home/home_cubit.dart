@@ -1,8 +1,8 @@
 import 'package:book_doc/features/home/domain/use_cases/home_useCases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/di/service_locator.dart';
-import '../../domain/entities/doctor.dart';
+import '../../../../../core/di/service_locator.dart';
+import '../../../domain/entities/doctor.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
