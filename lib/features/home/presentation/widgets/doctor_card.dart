@@ -16,7 +16,7 @@ class DoctorCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8.w),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: ClipRRect(

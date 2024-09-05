@@ -25,16 +25,18 @@ class Doctor {
     this.createdAt,
   });
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'imageUrl': imageUrl,
-        'phoneNumber': phoneNumber,
-        'specialization': specialization,
-        'address': address,
-        'bio': bio,
-        'rating': rating,
-        'createdAt': createdAt,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'createdAt': createdAt,
+      'name': name,
+      'email': email,
+      'imageUrl': imageUrl,
+      'phoneNumber': phoneNumber,
+      'specialization': specialization,
+      'address': address,
+      'bio': bio,
+      'rating': rating,
+    };
+  }
 }

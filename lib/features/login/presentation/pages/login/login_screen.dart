@@ -3,7 +3,6 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
-import 'package:book_doc/features/app-layout/presentation/pages/layout_providers.dart';
 import 'package:book_doc/features/login/presentation/pages/forget-password/forget_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/theme/app_fonts.dart';
+import '../../../../app-layout/presentation/pages/app_layout.dart';
 import '../../cubit/login/login_cubit.dart';
 import '../../cubit/login/login_state.dart';
 import '../../widgets/dont_have_account_text.dart';
@@ -135,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LayoutProviders(),
+                      builder: (context) => const AppLayout(),
                     ),
                   );
                 } else {
