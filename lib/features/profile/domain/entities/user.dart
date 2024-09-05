@@ -20,4 +20,18 @@ class MyUser {
     required this.gender,
     required this.imageUrl,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'fullName': fullName,
+      'email': email,
+      'password': password,
+      'phone': phone,
+      'age': age,
+      'gender': gender,
+      'address': address,
+      'imageUrl': imageUrl,
+    };
+  }
 }
