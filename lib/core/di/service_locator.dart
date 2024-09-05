@@ -7,6 +7,11 @@ import 'package:book_doc/features/profile/domain/use_cases/profile_usecase.dart'
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/appointments/data/data_sources/appointment_firebase.dart';
+import '../../features/appointments/data/repositories/appointment_repository_impl.dart';
+import '../../features/appointments/domain/repositories/appointment_repository.dart';
+import '../../features/appointments/domain/use_cases/appointment_useCases.dart';
+import '../../features/appointments/presentation/cubit/appointment/appointment_cubit.dart';
 import '../../features/home/presentation/cubit/home/home_cubit.dart';
 import '../../features/login/data/datasource/auth_firebase.dart';
 import '../../features/login/data/repository/auth_repository_impl.dart';
@@ -38,4 +43,12 @@ void setUpServiceLocator() {
   sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl());
   sl.registerFactory(() => HomeUseCases());
   sl.registerFactory(() => HomeCubit());
+
+  //! Appointment
+  sl.registerLazySingleton<AppointmentFirebase>(
+      () => AppointmentFirebaseImpl());
+  sl.registerLazySingleton<AppointmentRepository>(
+      () => AppointmentRepositoryImpl());
+  sl.registerFactory(() => AppointmentUseCases());
+  sl.registerFactory(() => AppointmentCubit());
 }

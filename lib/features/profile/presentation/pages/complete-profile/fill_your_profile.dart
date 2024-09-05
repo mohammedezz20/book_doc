@@ -4,7 +4,6 @@ import 'package:book_doc/core/assets/images/images.dart';
 import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/phone_text_field.dart';
-import 'package:book_doc/features/app-layout/presentation/pages/layout_providers.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_state.dart';
 import 'package:book_doc/features/profile/presentation/widgets/fill_your_profile_text.dart';
@@ -16,6 +15,7 @@ import '../../../../../core/theme/app_fonts.dart';
 import '../../../../../core/widgets/DropDownList.dart';
 import '../../../../../core/widgets/app_text_button.dart';
 import '../../../../../core/widgets/app_text_field.dart';
+import '../../../../app-layout/presentation/pages/app_layout.dart';
 
 class FillYourProfile extends StatelessWidget {
   const FillYourProfile(
@@ -185,7 +185,7 @@ class FillYourProfile extends StatelessWidget {
             if (state is CompleteProfileSuccessState) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => const LayoutProviders(),
+                  builder: (context) => const AppLayout(),
                 ),
               );
             } else if (state is CompleteProfileErrorState) {

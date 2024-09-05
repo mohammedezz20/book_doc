@@ -26,18 +26,4 @@ class MyUserDTO extends MyUser {
       imageUrl: json['imageUrl'],
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'fullName': fullName,
-      'email': email,
-      'password': password,
-      'phone': phone,
-      'age': age,
-      'gender': gender,
-      'address': address,
-      'imageUrl': imageUrl,
-    };
-  }
 }
