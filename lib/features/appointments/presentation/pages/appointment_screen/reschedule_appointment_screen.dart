@@ -1,5 +1,3 @@
-import 'package:book_doc/core/theme/app_fonts.dart';
-import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/summary_appointment_screen.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/date&time_widget.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/steps_list.dart';
@@ -7,19 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../home/domain/entities/doctor.dart';
+import '../../../../../core/theme/app_fonts.dart';
+import '../../../../../core/widgets/app_text_button.dart';
+import '../../../domain/entities/appointment_model.dart';
 
-class BookAppointmentScreen extends StatelessWidget {
-  const BookAppointmentScreen({super.key, required this.doctor});
+class RescheduleAppointmentScreen extends StatelessWidget {
+  const RescheduleAppointmentScreen({super.key, required this.appointment});
 
-  final Doctor doctor;
+  final AppointmentModel appointment;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Book Appointment',
+          'Reschedule Appointment',
           style: TextStyles.font18DarkBlueBold,
         ),
         centerTitle: true,
@@ -41,7 +41,7 @@ class BookAppointmentScreen extends StatelessWidget {
             children: [
               const StepsList(),
               verticalSpace(20),
-              DateAndTimeWidget(),
+              DateAndTimeWidget(appointment: appointment),
               verticalSpace(20),
               AppTextButton(
                 buttonText: 'Continue',
@@ -50,8 +50,9 @@ class BookAppointmentScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => SummaryAppointmentScreen(
-                        isBooking: true,
-                        doctor: doctor,
+                        doctor: appointment.doctor,
+                        isBooking: false,
+                        currentAppointment: appointment,
                       ),
                     ),
                   );

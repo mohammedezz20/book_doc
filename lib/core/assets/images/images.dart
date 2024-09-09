@@ -10,4 +10,5 @@ class AppImages {
   static String pediatricsCategory = 'assets/images/pediatrics.png';
   static String cardioCategory = 'assets/images/cardio.png';
   static String whatsapp = 'assets/images/whatsapp.png';
+  static String dots = 'assets/images/dots.png';
 }

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_fonts.dart';
 
-class DoctorDetailsTabListWidget extends StatelessWidget {
-  final Widget aboutContent;
-  final Widget locationContent;
-  final Widget reviewsContent;
+class AppointmentTabList extends StatelessWidget {
+  final Widget upcomingContent;
+  final Widget completedContent;
+  final Widget cancelledContent;
 
-  const DoctorDetailsTabListWidget({
+  const AppointmentTabList({
     super.key,
-    required this.aboutContent,
-    required this.locationContent,
-    required this.reviewsContent,
+    required this.upcomingContent,
+    required this.completedContent,
+    required this.cancelledContent,
   });
 
   @override
@@ -27,10 +27,10 @@ class DoctorDetailsTabListWidget extends StatelessWidget {
             indicatorColor: ColorsManager.mainBlue,
             tabs: const [
               Tab(
-                text: 'About',
+                text: 'Upcoming',
               ),
-              Tab(text: 'Location'),
-              Tab(text: 'Reviews'),
+              Tab(text: 'Completed'),
+              Tab(text: 'Cancelled'),
             ],
             labelStyle: TextStyles.font16WhiteSemiBold
                 .copyWith(color: ColorsManager.gray),
@@ -39,9 +39,9 @@ class DoctorDetailsTabListWidget extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                aboutContent,
-                locationContent,
-                reviewsContent,
+                upcomingContent,
+                completedContent,
+                cancelledContent,
               ],
             ),
           ),
