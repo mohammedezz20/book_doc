@@ -5,11 +5,15 @@ import '../../../cubit/appointment/appointment_cubit.dart';
 import '../../../cubit/appointment/appointment_state.dart';
 
 class TimeSlotPicker extends StatelessWidget {
-  const TimeSlotPicker({super.key});
+  TimeSlotPicker({super.key, this.currentTime});
 
+  String? currentTime;
   @override
   Widget build(BuildContext context) {
     var cubit = AppointmentCubit.get(context);
+    if (cubit.appointmentTime != currentTime) {
+      cubit.selectAppointmentTime(currentTime ?? '08:00 AM');
+    }
     return BlocBuilder<AppointmentCubit, AppointmentStates>(
       builder: (context, state) {
         return GridView.builder(

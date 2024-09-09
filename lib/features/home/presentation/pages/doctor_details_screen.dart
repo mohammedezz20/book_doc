@@ -52,7 +52,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     SliverFillRemaining(
-                      child: TabListWidget(
+                      child: DoctorDetailsTabListWidget(
                         aboutContent: AboutMeWidget(doctor: doctor),
                         locationContent: Container(),
                         reviewsContent: Container(),
