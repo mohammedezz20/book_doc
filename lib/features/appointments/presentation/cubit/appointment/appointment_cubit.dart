@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:book_doc/features/appointments/domain/entities/appointment_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +35,10 @@ class AppointmentCubit extends Cubit<AppointmentStates> {
       color: Colors.red,
     ),
   ];
+  List<AppointmentModel> appointmentsList = [];
+  List<AppointmentModel> completedAppointmentsList = [];
+  List<AppointmentModel> upcomingAppointmentsList = [];
+  List<AppointmentModel> cancelledAppointmentsList = [];
   final List<String> availableTimes = [
     '08.00 AM',
     '08.30 AM',
@@ -88,10 +93,10 @@ class AppointmentCubit extends Cubit<AppointmentStates> {
   void bookAppointment() async {
     emit(AppointmentLoadingState());
     AppointmentModel appointment = AppointmentModel(
-      appointmentDate: appointmentDate,
+      appointmentDate: Timestamp.fromDate(appointmentDate),
       appointmentType: appointmentType,
       appointmentTime: appointmentTime,
-      status: 'Appointment Pending',
+      status: 'Appointment Upcoming',
       doctor: doctor,
       patientName: FirebaseAuth.instance.currentUser!.displayName!,
       patientId: FirebaseAuth.instance.currentUser!.uid,
@@ -108,6 +113,91 @@ class AppointmentCubit extends Cubit<AppointmentStates> {
       log('Book Appointment Error: $response');
       emit(BookAppointmentErrorState(error: response));
     }
+  }
+
+  getAllAppointments() async {
+    var response = await _appointmentUseCases.getAllAppointments();
+    response.fold((l) {
+      log('Get All Appointments Error: $l');
+      emit(GetAllAppointmentsErrorStateState(error: l));
+    }, (r) {
+      appointmentsList = r;
+      upcomingAppointmentsList =
+          r.where((e) => e.status == 'Appointment Upcoming').toList();
+      completedAppointmentsList =
+          r.where((e) => e.status == 'Appointment Completed').toList();
+      cancelledAppointmentsList =
+          r.where((e) => e.status == 'Appointment Cancelled').toList();
+      log('Get All Appointments Success: $r');
+      emit(GetAllAppointmentsSuccessStateState());
+    });
+  }
+
+  getUpcomingAppointments() async {
+    emit(AppointmentLoadingState());
+    var response = await _appointmentUseCases.getAllAppointments();
+    response.fold((l) {
+      emit(GetUpcomingAppointmentsErrorStateState(error: l));
+    }, (r) {
+      upcomingAppointmentsList =
+          r.where((e) => e.status == 'Appointment Upcoming').toList();
+      emit(GetUpcomingAppointmentsSuccessStateState());
+    });
+  }
+
+  getCompletedAppointments() async {
+    emit(AppointmentLoadingState());
+    var response = await _appointmentUseCases.getAllAppointments();
+    response.fold((l) {
+      emit(GetCompletedAppointmentsErrorStateState(error: l));
+    }, (r) {
+      completedAppointmentsList =
+          r.where((e) => e.status == 'Appointment Completed').toList();
+      emit(GetCompletedAppointmentsSuccessStateState());
+    });
+  }
+
+  getCancelledAppointments() async {
+    emit(AppointmentLoadingState());
+    var response = await _appointmentUseCases.getAllAppointments();
+    response.fold((l) {
+      emit(GetCancelledAppointmentsErrorStateState(error: l));
+    }, (r) {
+      cancelledAppointmentsList =
+          r.where((e) => e.status == 'Appointment Cancelled').toList();
+      emit(GetCancelledAppointmentsSuccessStateState());
+    });
+  }
+
+  updateAppointmentStatus({required String id, required String status}) async {
+    var response =
+        await _appointmentUseCases.updateAppointmentStatus(id, status);
+    if (response == 'success') {
+      emit(UpdateAppointmentStatusSuccessState());
+    } else {
+      emit(UpdateAppointmentStatusErrorState(error: response));
+    }
+  }
+
+  updateAppointment(AppointmentModel appointment) async {
+    emit(AppointmentLoadingState());
+    String response = await _appointmentUseCases.updateAppointment(appointment);
+    if (response == 'success') {
+      init();
+      emit(
+        UpdateAppointmentSuccessState(
+          message: 'Appointment updated Successfully',
+        ),
+      );
+    } else {
+      log('Update Appointment Error: $response');
+      emit(UpdateAppointmentErrorState(error: response));
+    }
+  }
+
+  void setAppointmentDate(DateTime selectedDate) {
+    appointmentDate = selectedDate;
+    emit(AppointmentDateChangedState(newDate: appointmentDate));
   }
 
   init() {

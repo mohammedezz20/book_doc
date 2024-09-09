@@ -7,14 +7,18 @@ import '../../../cubit/appointment/appointment_state.dart';
 import 'date_item.dart';
 
 class CustomDatePicker extends StatelessWidget {
-  CustomDatePicker({super.key});
+  CustomDatePicker({super.key, this.initialDate});
 
   final int daysToShow = 7;
-  DateTime maxDate = DateTime.now().add(const Duration(days: 6));
-
+  final DateTime maxDate = DateTime.now().add(const Duration(days: 6));
+  DateTime? initialDate;
   @override
   Widget build(BuildContext context) {
     var cubit = AppointmentCubit.get(context);
+    if (cubit.appointmentDate != initialDate) {
+      cubit.setAppointmentDate(initialDate ?? DateTime.now());
+    }
+
     return BlocBuilder<AppointmentCubit, AppointmentStates>(
       builder: (context, state) {
         return Row(
@@ -43,9 +47,11 @@ class CustomDatePicker extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         cubit.selectAppointmentDate(dateToShow);
-                      }, // Pass the selected date
+                      },
                       child: DateItem(
-                          dateToShow: dateToShow, isSelected: isSelected),
+                        dateToShow: dateToShow,
+                        isSelected: isSelected,
+                      ),
                     );
                   },
                 ),

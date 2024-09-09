@@ -1,9 +1,11 @@
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/features/app-layout/presentation/pages/app_layout.dart';
+import 'package:book_doc/features/appointments/domain/entities/appointment_model.dart';
 import 'package:book_doc/features/appointments/presentation/cubit/appointment/appointment_cubit.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/book_information_widget.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/confirmed_widget.dart';
 import 'package:book_doc/features/home/presentation/widgets/doctor_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,9 +17,15 @@ import '../../../../home/domain/entities/doctor.dart';
 import '../../cubit/appointment/appointment_state.dart';
 
 class SummaryAppointmentScreen extends StatelessWidget {
-  const SummaryAppointmentScreen({super.key, required this.doctor});
+  const SummaryAppointmentScreen(
+      {super.key,
+      required this.doctor,
+      required this.isBooking,
+      this.currentAppointment});
 
   final Doctor doctor;
+  final bool isBooking;
+  final AppointmentModel? currentAppointment;
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +72,29 @@ class SummaryAppointmentScreen extends StatelessWidget {
                         child: CircularProgressIndicator(
                         color: ColorsManager.mainBlue,
                       ))
-                    : AppTextButton(
-                        buttonText: 'Book Now',
-                        onPressed: () {
-                          cubit.doctor = doctor;
-                          cubit.bookAppointment();
-                        }),
+                    : isBooking
+                        ? AppTextButton(
+                            buttonText: 'Book Now',
+                            onPressed: () {
+                              cubit.doctor = doctor;
+                              cubit.bookAppointment();
+                            })
+                        : AppTextButton(
+                            buttonText: 'Update Appointment',
+                            onPressed: () {
+                              AppointmentModel appointment = AppointmentModel(
+                                  id: currentAppointment!.id,
+                                  doctor: doctor,
+                                  patientName: currentAppointment!.patientName,
+                                  patientId: currentAppointment!.patientId,
+                                  appointmentDate:
+                                      Timestamp.fromDate(cubit.appointmentDate),
+                                  appointmentTime: cubit.appointmentTime,
+                                  appointmentType: cubit.appointmentType,
+                                  status: 'Appointment Upcoming');
+                              cubit.updateAppointment(appointment);
+                            },
+                          ),
               ],
             ),
           ),
@@ -91,8 +116,28 @@ class SummaryAppointmentScreen extends StatelessWidget {
         }
         if (state is BookAppointmentErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error),
+            ),
+          );
+        }
+        if (state is UpdateAppointmentSuccessState) {
+          ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Failed to Book Appointment'),
+              content: Text('Appointment updated successfully'),
+            ),
+          );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AppLayout(),
+            ),
+          );
+        }
+        if (state is UpdateAppointmentErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error),
             ),
           );
         }
