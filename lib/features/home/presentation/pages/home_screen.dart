@@ -4,6 +4,7 @@ import 'package:book_doc/features/home/presentation/widgets/recommendation_list.
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../cubit/home/home_cubit.dart';
 import '../cubit/home/home_state.dart';
@@ -18,19 +19,22 @@ class HomeScreen extends StatelessWidget {
       create: (context) => HomeCubit()..getDoctors(),
       child: BlocBuilder<HomeCubit, HomeStates>(
         builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              verticalSpace(10),
-              Text(
-                'Hi, ${FirebaseAuth.instance.currentUser!.displayName!} !',
-                style: TextStyles.font18DarkBlueBold,
-              ),
-              verticalSpace(20),
-              const CategoryList(),
-              verticalSpace(20),
-              const Expanded(child: RecommendationList()),
-            ],
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                verticalSpace(10),
+                Text(
+                  'Hi, ${FirebaseAuth.instance.currentUser!.displayName!} !',
+                  style: TextStyles.font18DarkBlueBold,
+                ),
+                verticalSpace(20),
+                const CategoryList(),
+                verticalSpace(20),
+                const Expanded(child: RecommendationList()),
+              ],
+            ),
           );
         },
       ),

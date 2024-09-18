@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:book_doc/features/home/presentation/cubit/home/home_cubit.dart';
 import 'package:book_doc/features/login/presentation/cubit/signup/sign_up_cubit.dart';
 import 'package:book_doc/features/login/presentation/pages/auth_state.dart';
+import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
+import 'package:book_doc/features/profile/presentation/cubit/language/language_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'features/app-layout/presentation/cubit/app_layout_cubit.dart';
@@ -19,16 +24,33 @@ class BookDoc extends StatelessWidget {
       minTextAdapt: true,
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(create: (context) => LanguageCubit()),
           BlocProvider(create: (context) => LoginCubit()),
           BlocProvider(create: (context) => SignUpCubit()),
           BlocProvider(create: (context) => AppLayoutCubit()),
           BlocProvider(create: (context) => HomeCubit()),
           BlocProvider(create: (context) => AppointmentCubit()),
+          BlocProvider(create: (context) => CompleteProfileCubit()),
         ],
-        child: const MaterialApp(
-          title: 'Book Doc',
-          debugShowCheckedModeBanner: false,
-          home: AuthState(),
+        child: BlocBuilder<LanguageCubit, Locale>(
+          builder: (BuildContext context, Locale state) {
+            log(state.toString());
+            return MaterialApp(
+              locale: state,
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('ar'),
+              ],
+              title: 'Book Doc',
+              debugShowCheckedModeBanner: false,
+              home: const AuthState(),
+            );
+          },
         ),
       ),
     );

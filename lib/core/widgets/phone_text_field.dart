@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phone_text_field/phone_text_field.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_fonts.dart';
 
 class CustomPhoneTextField extends StatelessWidget {
-  CustomPhoneTextField({super.key, required this.onChanged});
+  CustomPhoneTextField({super.key, required this.controller});
 
-  void Function(PhoneNumber)? onChanged;
-
+  final TextEditingController controller;
+  final PhoneNumber number = PhoneNumber(isoCode: 'EG');
   @override
   Widget build(BuildContext context) {
-    return PhoneTextField(
-      locale: const Locale('en'),
-      decoration: InputDecoration(
+    return InternationalPhoneNumberInput(
+      inputDecoration: InputDecoration(
         filled: true,
         hintText: 'WhatsApp Number',
         hintStyle: TextStyles.font14LightGrayRegular,
@@ -50,7 +49,7 @@ class CustomPhoneTextField extends StatelessWidget {
         ),
       ),
       textAlign: TextAlign.start,
-      searchFieldInputDecoration: InputDecoration(
+      searchBoxDecoration: InputDecoration(
         filled: true,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -85,8 +84,15 @@ class CustomPhoneTextField extends StatelessWidget {
         hintStyle: TextStyles.font14LightGrayRegular,
         fillColor: ColorsManager.moreLightGray,
       ),
-      initialCountryCode: "EG",
-      onChanged: onChanged,
+      initialValue: number,
+      selectorConfig: const SelectorConfig(
+        selectorType: PhoneInputSelectorType
+            .DIALOG, // Display dropdown for country selection
+      ),
+      textFieldController: controller,
+      keyboardType:
+          const TextInputType.numberWithOptions(signed: true, decimal: true),
+      onInputChanged: (PhoneNumber phoneNumber) {},
     );
   }
 }

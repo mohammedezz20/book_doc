@@ -20,7 +20,7 @@ class CompleteProfileCubit extends Cubit<CompleteProfileStates> {
   var fullNameController = TextEditingController();
   var ageController = TextEditingController();
   var addressController = TextEditingController();
-  String? whatAppNumber;
+  var whatsAppNumberController = TextEditingController();
   String? email;
   String? password;
   String? gender = 'Male';
@@ -46,10 +46,10 @@ class CompleteProfileCubit extends Cubit<CompleteProfileStates> {
     }
   }
 
-  changePhoneNumber(phone) {
-    whatAppNumber = phone.toString();
-    emit(ChangePhoneNumberState());
-  }
+  // changePhoneNumber(phone) {
+  //   whatAppNumber = phone.toString();
+  //   emit(ChangePhoneNumberState());
+  // }
 
   changeGender(String value) {
     gender = value;
@@ -67,7 +67,7 @@ class CompleteProfileCubit extends Cubit<CompleteProfileStates> {
       imageUrl = imageResponse;
       MyUserDTO user = MyUserDTO(
           fullName: fullNameController.text,
-          phone: whatAppNumber,
+          phone: whatsAppNumberController.text,
           address: addressController.text,
           age: int.parse(ageController.text),
           email: email,
@@ -83,7 +83,7 @@ class CompleteProfileCubit extends Cubit<CompleteProfileStates> {
         fullNameController.clear();
         ageController.clear();
         addressController.clear();
-        whatAppNumber = null;
+        whatsAppNumberController.clear();
         email = null;
         password = null;
         gender = 'Male';
