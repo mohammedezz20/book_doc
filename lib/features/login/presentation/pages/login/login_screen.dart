@@ -99,9 +99,7 @@ class LoginScreen extends StatelessWidget {
                             buttonText: 'Login',
                             textStyle: TextStyles.font16WhiteSemiBold,
                             onPressed: () {
-                              if (cubit.formKey.currentState!.validate()) {
-                                cubit.login();
-                              }
+                              cubit.login();
                             },
                           ),
                     verticalSpace(40),

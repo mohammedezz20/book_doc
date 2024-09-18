@@ -17,7 +17,6 @@ class LoginCubit extends Cubit<LoginStates> {
   TextEditingController passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool isObscure = true;
-  var user = 'gg';
   void showPassword() {
     isObscure = !isObscure;
     emit(ShowPasswordState());
@@ -25,12 +24,16 @@ class LoginCubit extends Cubit<LoginStates> {
 
   Future<void> login() async {
     emit(LoginLoadingState());
-    String response = await _authUseCase.signIn(
-        emailController.text, passwordController.text);
-    if (response == 'success') {
-      emit(LoginSuccessState());
+    if (formKey.currentState!.validate()) {
+      String response = await _authUseCase.signIn(
+          emailController.text, passwordController.text);
+      if (response == 'success') {
+        emit(LoginSuccessState());
+      } else {
+        emit(LoginErrorState(errorMessage: 'wrong password or email'));
+      }
     } else {
-      emit(LoginErrorState(errorMessage: 'wrong password or email'));
+      emit(LoginErrorState(errorMessage: 'Please fill in all fields'));
     }
   }
 
@@ -38,8 +41,9 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoginLoadingState());
     UserCredential? response = await _authUseCase.signInWithGoogle();
     if (response != null) {
-      user = response.user!.displayName!;
       emit(LoginSuccessState());
+      emailController.clear();
+      passwordController.clear();
     } else {
       emit(LoginErrorState(errorMessage: 'something went wrong'));
     }

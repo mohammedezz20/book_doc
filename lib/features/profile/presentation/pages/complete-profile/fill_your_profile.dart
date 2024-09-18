@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:book_doc/core/assets/images/images.dart';
 import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
@@ -113,10 +111,7 @@ class FillYourProfile extends StatelessWidget {
                       ),
                       verticalSpace(16),
                       CustomPhoneTextField(
-                        onChanged: (phoneNumber) {
-                          log(phoneNumber.number.toString());
-                          cubit.changePhoneNumber(phoneNumber.number);
-                        },
+                        controller: cubit.whatsAppNumberController,
                       ),
                       verticalSpace(16),
                       AppTextFormField(

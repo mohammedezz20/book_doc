@@ -3,7 +3,6 @@ import 'package:book_doc/features/app-layout/presentation/cubit/app_layout_cubit
 import 'package:book_doc/features/app-layout/presentation/cubit/app_layout_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({super.key});
@@ -26,10 +25,7 @@ class AppLayout extends StatelessWidget {
                 onTap: cubit.changeSelectedIndex,
                 currentIndex: cubit.selectedIndex,
               ),
-              body: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                  child: cubit.screens[cubit.selectedIndex]),
+              body: cubit.screens[cubit.selectedIndex],
             ),
           ),
         );

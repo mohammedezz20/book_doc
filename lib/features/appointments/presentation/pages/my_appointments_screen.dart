@@ -8,30 +8,33 @@ import 'package:book_doc/features/appointments/presentation/widgets/completed_li
 import 'package:book_doc/features/appointments/presentation/widgets/upcoming_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyAppointmentsScreen extends StatelessWidget {
   const MyAppointmentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppointmentCubit.get(context);
     return BlocBuilder<AppointmentCubit, AppointmentStates>(
       builder: (context, state) {
-        return Column(
-          children: [
-            Text(
-              'My Appointments',
-              style: TextStyles.font18DarkBlueSemiBold,
-            ),
-            verticalSpace(30),
-            const Expanded(
-              child: AppointmentTabList(
-                upcomingContent: UpcomingList(),
-                completedContent: CompletedList(),
-                cancelledContent: CancelledList(),
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+          child: Column(
+            children: [
+              Text(
+                'My Appointments',
+                style: TextStyles.font18DarkBlueSemiBold,
               ),
-            ),
-          ],
+              verticalSpace(30),
+              const Expanded(
+                child: AppointmentTabList(
+                  upcomingContent: UpcomingList(),
+                  completedContent: CompletedList(),
+                  cancelledContent: CancelledList(),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

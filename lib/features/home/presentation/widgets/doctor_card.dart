@@ -26,6 +26,12 @@ class DoctorCard extends StatelessWidget {
                 width: 110.w,
                 height: 152.h,
                 fit: BoxFit.cover,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                  child: CircularProgressIndicator(
+                      value: downloadProgress.progress),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),
