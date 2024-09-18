@@ -165,4 +165,10 @@ class TextStyles {
     fontWeight: FontWeightHelper.medium,
     color: Colors.white,
   );
+  static TextStyle font16DarkBlueMedium = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.darkBlue,
+  );
 }

@@ -105,7 +105,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (context) => BlocProvider(
                                   create: (context) => LoginCubit(),
-                                  child: const LoginScreen(),
+                                  child: LoginScreen(),
                                 ),
                               ),
                             );

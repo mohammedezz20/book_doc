@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:book_doc/features/profile/data/data_sources/profile_firebase.dart';
+import 'package:book_doc/features/profile/domain/entities/user.dart';
+import 'package:dartz/dartz.dart';
 
 import '../../../../core/di/service_locator.dart';
 import '../../domain/repositories/profile_repository.dart';
@@ -17,5 +19,15 @@ class ProfileRepositoryImpl implements ProfileRepository {
   @override
   Future<String> addUserToFireStore(MyUserDTO user) {
     return _profileFirebase.addUserToFireStore(user);
+  }
+
+  @override
+  Future<Either<String, MyUser>> getUserById(String id) {
+    return _profileFirebase.getUserById(id);
+  }
+
+  @override
+  Future<String> updateUserData(MyUser user) {
+    return _profileFirebase.updateUserData(user);
   }
 }
