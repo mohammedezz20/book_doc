@@ -131,6 +131,7 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       verticalSpace(16),
                       AppTextFormField(
+                        keyboardType: TextInputType.number,
                         controller: cubit.passwordController,
                         hintText: 'Password',
                         validator: (value) {
