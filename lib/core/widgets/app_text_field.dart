@@ -9,6 +9,7 @@ class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
+  final InputBorder? disabledBorder;
   final TextStyle? inputTextStyle;
   final TextStyle? hintStyle;
   final String hintText;
@@ -22,11 +23,14 @@ class AppTextFormField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final void Function(PointerDownEvent)? onTapOutside;
   final TextInputType? keyboardType;
+  final bool? enabled;
+
   const AppTextFormField({
     super.key,
     this.contentPadding,
     this.focusedBorder,
     this.enabledBorder,
+    this.disabledBorder,
     this.inputTextStyle,
     this.hintStyle,
     required this.hintText,
@@ -40,6 +44,7 @@ class AppTextFormField extends StatelessWidget {
     this.inputFormatters,
     this.onTapOutside,
     this.keyboardType,
+    this.enabled,
   });
 
   @override
@@ -47,6 +52,7 @@ class AppTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
+        enabled: enabled ?? true,
         isDense: true,
         contentPadding: contentPadding ??
             EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
@@ -59,6 +65,14 @@ class AppTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0.r),
             ),
         enabledBorder: enabledBorder ??
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ColorsManager.lighterGray,
+                width: 1.3.w,
+              ),
+              borderRadius: BorderRadius.circular(16.0.r),
+            ),
+        disabledBorder: disabledBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
                 color: ColorsManager.lighterGray,

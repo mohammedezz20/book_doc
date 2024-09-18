@@ -35,6 +35,19 @@ class EditProfileScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
+                actions: [
+                  cubit.isEditable
+                      ? const SizedBox()
+                      : IconButton(
+                          onPressed: () {
+                            cubit.enableEditing();
+                          },
+                          icon: const Icon(
+                            Icons.edit_outlined,
+                            color: Colors.black,
+                          ),
+                        ),
+                ],
                 elevation: 0,
                 centerTitle: true,
                 backgroundColor: Colors.white,
@@ -47,7 +60,9 @@ class EditProfileScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Stack(
-                        alignment: Alignment.bottomRight,
+                        alignment: cubit.isEditable
+                            ? Alignment.bottomRight
+                            : Alignment.center,
                         children: [
                           CircleAvatar(
                               radius: 60.r,
@@ -100,20 +115,24 @@ class EditProfileScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: CircleAvatar(
-                              radius: 15.r,
-                              backgroundColor: ColorsManager.moreLighterGray,
-                              child: Icon(
-                                Icons.edit_outlined,
-                                color: ColorsManager.mainBlue,
-                                size: 14.sp,
-                              ),
-                            ),
+                            child: cubit.isEditable == false
+                                ? Container()
+                                : CircleAvatar(
+                                    radius: 15.r,
+                                    backgroundColor:
+                                        ColorsManager.moreLighterGray,
+                                    child: Icon(
+                                      Icons.edit_outlined,
+                                      color: ColorsManager.mainBlue,
+                                      size: 14.sp,
+                                    ),
+                                  ),
                           ),
                         ],
                       ),
                       verticalSpace(20),
                       AppTextFormField(
+                        enabled: cubit.isEditable,
                         controller: cubit.fullNameController,
                         hintText: 'Full Name',
                         validator: (value) {
@@ -131,7 +150,7 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       verticalSpace(16),
                       AppTextFormField(
-                        keyboardType: TextInputType.number,
+                        enabled: cubit.isEditable,
                         controller: cubit.passwordController,
                         hintText: 'Password',
                         validator: (value) {
@@ -153,6 +172,7 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       verticalSpace(16),
                       AppTextFormField(
+                        enabled: cubit.isEditable,
                         controller: cubit.ageController,
                         keyboardType: TextInputType.number,
                         hintText: 'Age',
@@ -167,6 +187,7 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       verticalSpace(16),
                       AppTextFormField(
+                        enabled: cubit.isEditable,
                         controller: cubit.addressController,
                         hintText: 'Address',
                         validator: (value) {
@@ -179,17 +200,19 @@ class EditProfileScreen extends StatelessWidget {
                         },
                       ),
                       verticalSpace(30),
-                      state is EditProfileLoadingState
-                          ? const CircularProgressIndicator(
-                              color: ColorsManager.mainBlue,
-                            )
-                          : AppTextButton(
-                              buttonText: 'Save',
-                              textStyle: TextStyles.font16WhiteSemiBold,
-                              onPressed: () {
-                                cubit.editUserData();
-                              },
-                            ),
+                      cubit.isEditable == false
+                          ? Container()
+                          : state is EditProfileLoadingState
+                              ? const CircularProgressIndicator(
+                                  color: ColorsManager.mainBlue,
+                                )
+                              : AppTextButton(
+                                  buttonText: 'Save',
+                                  textStyle: TextStyles.font16WhiteSemiBold,
+                                  onPressed: () {
+                                    cubit.editUserData();
+                                  },
+                                ),
                     ],
                   ),
                 ),

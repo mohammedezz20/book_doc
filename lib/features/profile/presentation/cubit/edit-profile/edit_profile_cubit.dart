@@ -33,6 +33,7 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
   String? gender = 'Male';
   String imageUrl = '';
   bool isObscure = true;
+  bool isEditable = false;
 
   void showPassword() {
     isObscure = !isObscure;
@@ -82,6 +83,11 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
     }
   }
 
+  void enableEditing() {
+    isEditable = true;
+    emit(EnableEditingState());
+  }
+
   Future<void> editUserData() async {
     emit(EditProfileLoadingState());
     try {
@@ -122,8 +128,8 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
         await GlobalVariables.user.updatePhotoURL(imageUrl);
         await GlobalVariables.user.reload();
         GlobalVariables.user = FirebaseAuth.instance.currentUser!;
-
         emit(EditProfileSuccessState(user: GlobalVariables.user));
+        isEditable = false;
       } else {
         emit(EditProfileErrorState(
             errorMessage: 'Error while updating user data!'));
