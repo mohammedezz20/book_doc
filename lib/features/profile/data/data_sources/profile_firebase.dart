@@ -20,7 +20,7 @@ abstract class ProfileFirebase {
 class ProfileFirebaseImpl implements ProfileFirebase {
   @override
   Future<String> uploadProfileImageToFireStorage(File? pickedImage) async {
-    String fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
+    String fileName = '${FirebaseAuth.instance.currentUser!.uid}.png';
     try {
       TaskSnapshot snapshot = await FirebaseStorage.instance
           .ref()
