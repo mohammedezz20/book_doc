@@ -1,4 +1,3 @@
-import 'package:book_doc/core/shared/global-variables.dart';
 import 'package:book_doc/core/widgets/custom_cached_network_image.dart';
 import 'package:book_doc/features/profile/presentation/cubit/edit-profile/edit_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/cubit/edit-profile/edit_profile_state.dart';
@@ -21,183 +20,176 @@ class EditProfileScreen extends StatelessWidget {
     var cubit = EditProfileCubit.get(context);
     return BlocConsumer<EditProfileCubit, EditProfileStates>(
       builder: (context, state) {
-        return PopScope(
-          canPop: true,
-          onPopInvokedWithResult: (didPop, result) async {
-            await GlobalVariables.user.reload();
-          },
-          child: Container(
-            color: Colors.white,
-            child: SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    'Personal Information',
-                    style: TextStyles.font18DarkBlueBold,
-                  ),
-                  leading: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  elevation: 0,
-                  centerTitle: true,
-                  backgroundColor: Colors.white,
+        return Container(
+          color: Colors.white,
+          child: SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  'Personal Information',
+                  style: TextStyles.font18DarkBlueBold,
                 ),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                elevation: 0,
+                centerTitle: true,
                 backgroundColor: Colors.white,
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: Alignment.bottomRight,
-                          children: [
-                            CircleAvatar(
-                                radius: 60.r,
-                                backgroundColor: Colors.white,
-                                child: cubit.pickedImage != null
-                                    ? ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(60.r),
-                                        child: Image.file(
-                                          cubit.pickedImage!,
-                                          width: 120.w,
-                                          height: 120.h,
-                                          fit: BoxFit.cover,
+              ),
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+                  child: Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          CircleAvatar(
+                              radius: 60.r,
+                              backgroundColor: Colors.white,
+                              child: cubit.pickedImage != null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(60.r),
+                                      child: Image.file(
+                                        cubit.pickedImage!,
+                                        width: 120.w,
+                                        height: 120.h,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : cubit.imageUrl.isNotEmpty
+                                      ? CustomCachedNetworkImage(
+                                          imageUrl: cubit.imageUrl)
+                                      : null),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () async {
+                                          cubit.pickImageFromCamera();
+                                          Navigator.pop(context);
+                                        },
+                                        icon: const Icon(
+                                          Icons.camera_alt_outlined,
+                                          size: 40,
                                         ),
-                                      )
-                                    : cubit.imageUrl.isNotEmpty
-                                        ? CustomCachedNetworkImage(
-                                            imageUrl: cubit.imageUrl)
-                                        : null),
-                            GestureDetector(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    content: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        IconButton(
-                                          onPressed: () async {
-                                            cubit.pickImageFromCamera();
-                                            Navigator.pop(context);
-                                          },
-                                          icon: const Icon(
-                                            Icons.camera_alt_outlined,
-                                            size: 40,
-                                          ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () async {
+                                          cubit.pickImageFromGallery();
+                                          Navigator.pop(context);
+                                        },
+                                        icon: const Icon(
+                                          Icons.photo_library_outlined,
+                                          size: 40,
                                         ),
-                                        IconButton(
-                                          onPressed: () async {
-                                            cubit.pickImageFromGallery();
-                                            Navigator.pop(context);
-                                          },
-                                          icon: const Icon(
-                                            Icons.photo_library_outlined,
-                                            size: 40,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                );
-                              },
-                              child: CircleAvatar(
-                                radius: 15.r,
-                                backgroundColor: ColorsManager.moreLighterGray,
-                                child: Icon(
-                                  Icons.edit_outlined,
-                                  color: ColorsManager.mainBlue,
-                                  size: 14.sp,
                                 ),
+                              );
+                            },
+                            child: CircleAvatar(
+                              radius: 15.r,
+                              backgroundColor: ColorsManager.moreLighterGray,
+                              child: Icon(
+                                Icons.edit_outlined,
+                                color: ColorsManager.mainBlue,
+                                size: 14.sp,
                               ),
                             ),
-                          ],
-                        ),
-                        verticalSpace(20),
-                        AppTextFormField(
-                          controller: cubit.fullNameController,
-                          hintText: 'Full Name',
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your full name';
-                            }
-                          },
-                          onTapOutside: (p0) {
-                            FocusScope.of(context).unfocus();
-                          },
-                        ),
-                        verticalSpace(16),
-                        CustomPhoneTextField(
-                          controller: cubit.whatsAppNumberController,
-                        ),
-                        verticalSpace(16),
-                        AppTextFormField(
-                          controller: cubit.passwordController,
-                          hintText: 'Password',
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a valid password!';
-                            }
-                          },
-                          onTapOutside: (p0) {
-                            FocusScope.of(context).unfocus();
-                          },
-                          isObscureText: cubit.isObscure,
-                          suffixIcon: IconButton(
+                          ),
+                        ],
+                      ),
+                      verticalSpace(20),
+                      AppTextFormField(
+                        controller: cubit.fullNameController,
+                        hintText: 'Full Name',
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your full name';
+                          }
+                        },
+                        onTapOutside: (p0) {
+                          FocusScope.of(context).unfocus();
+                        },
+                      ),
+                      verticalSpace(16),
+                      CustomPhoneTextField(
+                        controller: cubit.whatsAppNumberController,
+                      ),
+                      verticalSpace(16),
+                      AppTextFormField(
+                        controller: cubit.passwordController,
+                        hintText: 'Password',
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a valid password!';
+                          }
+                        },
+                        onTapOutside: (p0) {
+                          FocusScope.of(context).unfocus();
+                        },
+                        isObscureText: cubit.isObscure,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              cubit.showPassword();
+                            },
+                            icon: !cubit.isObscure
+                                ? const Icon(Icons.visibility_off_outlined)
+                                : const Icon(Icons.visibility_outlined)),
+                      ),
+                      verticalSpace(16),
+                      AppTextFormField(
+                        controller: cubit.ageController,
+                        keyboardType: TextInputType.number,
+                        hintText: 'Age',
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your age!';
+                          }
+                        },
+                        onTapOutside: (p0) {
+                          FocusScope.of(context).unfocus();
+                        },
+                      ),
+                      verticalSpace(16),
+                      AppTextFormField(
+                        controller: cubit.addressController,
+                        hintText: 'Address',
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your address!';
+                          }
+                        },
+                        onTapOutside: (p0) {
+                          FocusScope.of(context).unfocus();
+                        },
+                      ),
+                      verticalSpace(30),
+                      state is EditProfileLoadingState
+                          ? const CircularProgressIndicator(
+                              color: ColorsManager.mainBlue,
+                            )
+                          : AppTextButton(
+                              buttonText: 'Save',
+                              textStyle: TextStyles.font16WhiteSemiBold,
                               onPressed: () {
-                                cubit.showPassword();
+                                cubit.editUserData();
                               },
-                              icon: !cubit.isObscure
-                                  ? const Icon(Icons.visibility_off_outlined)
-                                  : const Icon(Icons.visibility_outlined)),
-                        ),
-                        verticalSpace(16),
-                        AppTextFormField(
-                          controller: cubit.ageController,
-                          keyboardType: TextInputType.number,
-                          hintText: 'Age',
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your age!';
-                            }
-                          },
-                          onTapOutside: (p0) {
-                            FocusScope.of(context).unfocus();
-                          },
-                        ),
-                        verticalSpace(16),
-                        AppTextFormField(
-                          controller: cubit.addressController,
-                          hintText: 'Address',
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your address!';
-                            }
-                          },
-                          onTapOutside: (p0) {
-                            FocusScope.of(context).unfocus();
-                          },
-                        ),
-                        verticalSpace(30),
-                        state is EditProfileLoadingState
-                            ? const CircularProgressIndicator(
-                                color: ColorsManager.mainBlue,
-                              )
-                            : AppTextButton(
-                                buttonText: 'Save',
-                                textStyle: TextStyles.font16WhiteSemiBold,
-                                onPressed: () {
-                                  cubit.editUserData();
-                                },
-                              ),
-                      ],
-                    ),
+                            ),
+                    ],
                   ),
                 ),
               ),
