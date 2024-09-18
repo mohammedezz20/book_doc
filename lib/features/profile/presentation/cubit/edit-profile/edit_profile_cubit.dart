@@ -53,7 +53,7 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
   }
 
   getUserData() async {
-    var response = await _profileUseCase.getUserById(GlobalVariables.user.uid);
+    var response = await _profileUseCase.getUserById(GlobalVariables.user!.uid);
     response.fold((l) {
       log(l.toString());
       emit(GetUserDataErrorState(errorMessage: l));
@@ -120,15 +120,15 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
         password: passwordController.text.trim(),
         gender: gender,
         imageUrl: imageUrl,
-        id: GlobalVariables.user.uid,
+        id: GlobalVariables.user!.uid,
       );
       String response = await _profileUseCase.updateUserData(user);
       if (response == 'success') {
-        GlobalVariables.user.updateDisplayName(fullNameController.text.trim());
-        await GlobalVariables.user.updatePhotoURL(imageUrl);
-        await GlobalVariables.user.reload();
+        GlobalVariables.user!.updateDisplayName(fullNameController.text.trim());
+        await GlobalVariables.user!.updatePhotoURL(imageUrl);
+        await GlobalVariables.user!.reload();
         GlobalVariables.user = FirebaseAuth.instance.currentUser!;
-        emit(EditProfileSuccessState(user: GlobalVariables.user));
+        emit(EditProfileSuccessState(user: GlobalVariables.user!));
         isEditable = false;
       } else {
         emit(EditProfileErrorState(

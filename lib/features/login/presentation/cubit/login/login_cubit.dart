@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,6 @@ class LoginCubit extends Cubit<LoginStates> {
   final _authUseCase = sl.get<AuthUseCase>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
   bool isObscure = true;
   void showPassword() {
     isObscure = !isObscure;
@@ -24,7 +25,7 @@ class LoginCubit extends Cubit<LoginStates> {
 
   Future<void> login() async {
     emit(LoginLoadingState());
-    if (formKey.currentState!.validate()) {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       String response = await _authUseCase.signIn(
           emailController.text, passwordController.text);
       if (response == 'success') {
@@ -41,11 +42,21 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoginLoadingState());
     UserCredential? response = await _authUseCase.signInWithGoogle();
     if (response != null) {
-      emit(LoginSuccessState());
-      emailController.clear();
-      passwordController.clear();
+      log('account is new ? ${response.additionalUserInfo!.isNewUser}');
+      bool userExists = response.additionalUserInfo!.isNewUser;
+      if (userExists == true) {
+        emit(
+          CompleteGoogleAccountState(
+            user: response.user!,
+          ),
+        );
+      } else {
+        emit(LoginSuccessState());
+      }
     } else {
-      emit(LoginErrorState(errorMessage: 'something went wrong'));
+      emit(
+        LoginErrorState(errorMessage: 'something went wrong'),
+      );
     }
   }
 

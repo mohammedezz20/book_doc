@@ -1,8 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 abstract class LoginStates {}
 
 class LoginInitialState extends LoginStates {}
 
 class LoginSuccessState extends LoginStates {}
+
+class CompleteGoogleAccountState extends LoginStates {
+  final User user;
+
+  CompleteGoogleAccountState({required this.user});
+}
 
 class LoginErrorState extends LoginStates {
   String errorMessage;

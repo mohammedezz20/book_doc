@@ -4,6 +4,7 @@ import 'package:book_doc/features/profile/presentation/cubit/edit-profile/edit_p
 import 'package:book_doc/features/profile/presentation/pages/edit_profile.dart';
 import 'package:book_doc/features/profile/presentation/widgets/profile_app_bar.dart';
 import 'package:book_doc/features/profile/presentation/widgets/profile_body_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    var user;
+    User? user;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             child: ProfileBodyWidget(
-              user: user ?? GlobalVariables.user,
+              user: user ?? GlobalVariables.user!,
             ),
           ),
           verticalSpace(20),

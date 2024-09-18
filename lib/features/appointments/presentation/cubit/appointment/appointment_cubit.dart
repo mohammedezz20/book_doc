@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:book_doc/core/shared/global-variables.dart';
 import 'package:book_doc/features/appointments/domain/entities/appointment_model.dart';
+import 'package:book_doc/features/profile/domain/entities/user.dart';
+import 'package:book_doc/features/profile/domain/use_cases/profile_usecase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +19,7 @@ class AppointmentCubit extends Cubit<AppointmentStates> {
 
   static AppointmentCubit get(context) => BlocProvider.of(context);
   final _appointmentUseCases = sl.get<AppointmentUseCases>();
+  final _profileUseCases = sl.get<ProfileUseCases>();
 
   final List<AppointmentType> appointmentTypes = [
     AppointmentType(
@@ -89,6 +92,15 @@ class AppointmentCubit extends Cubit<AppointmentStates> {
   }
 
   late Doctor doctor;
+  late MyUser user;
+
+  Future<void> getUserData() async {
+    final userResponse =
+        await _profileUseCases.getUserById(GlobalVariables.user!.uid);
+    userResponse.fold((l) => null, (r) {
+      user = r;
+    });
+  }
 
   void bookAppointment() async {
     emit(AppointmentLoadingState());
@@ -98,8 +110,7 @@ class AppointmentCubit extends Cubit<AppointmentStates> {
       appointmentTime: appointmentTime,
       status: 'Appointment Upcoming',
       doctor: doctor,
-      patientName: FirebaseAuth.instance.currentUser!.displayName!,
-      patientId: FirebaseAuth.instance.currentUser!.uid,
+      patient: user,
     );
     String response = await _appointmentUseCases.addAppointment(appointment);
     if (response == 'success') {

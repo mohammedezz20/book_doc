@@ -31,6 +31,7 @@ class SummaryAppointmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = AppointmentCubit.get(context);
     return BlocConsumer<AppointmentCubit, AppointmentStates>(
+      bloc: cubit..getUserData(),
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -85,8 +86,7 @@ class SummaryAppointmentScreen extends StatelessWidget {
                               AppointmentModel appointment = AppointmentModel(
                                   id: currentAppointment!.id,
                                   doctor: doctor,
-                                  patientName: currentAppointment!.patientName,
-                                  patientId: currentAppointment!.patientId,
+                                  patient: cubit.user,
                                   appointmentDate:
                                       Timestamp.fromDate(cubit.appointmentDate),
                                   appointmentTime: cubit.appointmentTime,

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/shared/global-variables.dart';
 import '../../domain/entities/appointment_model.dart';
 import '../models/appointment_dto.dart';
 
@@ -38,6 +39,7 @@ class AppointmentFirebaseImpl implements AppointmentFirebase {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await FirebaseFirestore.instance
               .collection('appointments')
+              .where('patient.id', isEqualTo: GlobalVariables.user!.uid)
               .orderBy('appointmentDate')
               .orderBy('appointmentTime')
               .get();

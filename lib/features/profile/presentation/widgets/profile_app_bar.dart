@@ -1,7 +1,9 @@
 import 'package:book_doc/core/theme/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../cubit/setting/setting_cubit.dart';
 import '../pages/settings/settings_screen.dart';
 
 class ProfileAppBar extends StatelessWidget {
@@ -28,7 +30,9 @@ class ProfileAppBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SettingsScreen(),
+                  builder: (context) => BlocProvider(
+                      create: (context) => SettingCubit(),
+                      child: const SettingsScreen()),
                 ),
               );
             },

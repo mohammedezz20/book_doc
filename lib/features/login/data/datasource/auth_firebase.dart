@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,7 +20,7 @@ class AuthFirebaseImpl implements AuthFirebase {
   Future<String> signIn(String email, String password) async {
     String message = '';
     try {
-      final credential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       message = 'success';
     } on FirebaseAuthException catch (e) {
@@ -41,6 +42,7 @@ class AuthFirebaseImpl implements AuthFirebase {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
+        log(googleUser.toString());
         return null;
       }
       final GoogleSignInAuthentication googleAuth =
@@ -91,6 +93,18 @@ class AuthFirebaseImpl implements AuthFirebase {
     } catch (e) {
       log('Error sending password reset email: $e');
       return 'error';
+    }
+  }
+
+  static Future<bool> checkIfUidExists(String uid) async {
+    CollectionReference usersCollection =
+        FirebaseFirestore.instance.collection('users');
+    DocumentSnapshot userDoc = await usersCollection.doc(uid).get();
+
+    if (userDoc.exists) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
