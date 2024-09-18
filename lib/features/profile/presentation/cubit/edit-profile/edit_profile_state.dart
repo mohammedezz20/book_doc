@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 abstract class EditProfileStates {}
 
 class EditProfileInitialState extends EditProfileStates {}
@@ -12,7 +14,11 @@ class PickImageErrorState extends EditProfileStates {}
 
 class ChangePhoneNumberState extends EditProfileStates {}
 
-class EditProfileSuccessState extends EditProfileStates {}
+class EditProfileSuccessState extends EditProfileStates {
+  final User user;
+
+  EditProfileSuccessState({required this.user});
+}
 
 class EditProfileErrorState extends EditProfileStates {
   final String errorMessage;

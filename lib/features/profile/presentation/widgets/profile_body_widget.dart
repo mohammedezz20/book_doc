@@ -10,7 +10,9 @@ import '../../../../core/theme/app_fonts.dart';
 import '../cubit/complete_profile/complete_profile_state.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
-  const ProfileBodyWidget({super.key});
+  const ProfileBodyWidget({super.key, required this.user});
+
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +32,17 @@ class ProfileBodyWidget extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 60.r,
                       backgroundColor: Colors.white,
-                      child: CustomCachedNetworkImage(
-                          imageUrl:
-                              FirebaseAuth.instance.currentUser!.photoURL!),
+                      child: CustomCachedNetworkImage(imageUrl: user.photoURL!),
                     ),
                   ),
                   verticalSpace(20),
                   Text(
-                    FirebaseAuth.instance.currentUser!.displayName!,
+                    user.displayName!,
                     style: TextStyles.font18DarkBlueSemiBold,
                   ),
                   verticalSpace(5),
                   Text(
-                    FirebaseAuth.instance.currentUser!.email!,
+                    user.email!,
                     style: TextStyles.font14GrayRegular,
                   ),
                   verticalSpace(20),

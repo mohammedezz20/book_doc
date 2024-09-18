@@ -1,3 +1,4 @@
+import 'package:book_doc/core/shared/global-variables.dart';
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/features/profile/presentation/cubit/edit-profile/edit_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/pages/edit_profile.dart';
@@ -12,11 +13,17 @@ import '../../../../core/assets/vectors/vectors.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theme/app_fonts.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
   Widget build(BuildContext context) {
+    var user;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,12 +42,14 @@ class ProfileScreen extends StatelessWidget {
                 topRight: Radius.circular(30.r),
               ),
             ),
-            child: const ProfileBodyWidget(),
+            child: ProfileBodyWidget(
+              user: user ?? GlobalVariables.user,
+            ),
           ),
           verticalSpace(20),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
+            onTap: () async {
+              final updatedUser = Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => BlocProvider(
@@ -49,6 +58,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               );
+              user = await updatedUser;
+              setState(() {});
             },
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),

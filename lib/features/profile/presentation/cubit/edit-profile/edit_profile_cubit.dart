@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/di/service_locator.dart';
 import '../../../../../core/helpers/pick_image.dart';
+import '../../../../../core/shared/global-variables.dart';
 import '../../../data/models/user_dto.dart';
 import '../../../domain/entities/user.dart';
 import '../../../domain/use_cases/profile_usecase.dart';
@@ -51,8 +52,7 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
   }
 
   getUserData() async {
-    var response = await _profileUseCase
-        .getUserById(FirebaseAuth.instance.currentUser!.uid);
+    var response = await _profileUseCase.getUserById(GlobalVariables.user.uid);
     response.fold((l) {
       log(l.toString());
       emit(GetUserDataErrorState(errorMessage: l));
@@ -85,13 +85,14 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
   Future<void> editUserData() async {
     emit(EditProfileLoadingState());
     try {
-      if (imageUrl.isEmpty) {
+      if (pickedImage != null) {
         String imageResponse =
             await _profileUseCase.uploadProfileImageToFireStorage(pickedImage);
         if (imageResponse == 'error') {
-          emit(EditProfileErrorState(
-              errorMessage: 'Error while uploading image!'));
-          return; // Exit early on error
+          emit(
+            EditProfileErrorState(errorMessage: 'Error while uploading image!'),
+          );
+          return;
         }
         imageUrl = imageResponse;
       }
@@ -101,7 +102,7 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
         age = int.parse(ageController.text);
       } catch (e) {
         emit(EditProfileErrorState(errorMessage: 'Invalid age format!'));
-        return; // Exit early on error
+        return;
       }
 
       MyUserDTO user = MyUserDTO(
@@ -113,20 +114,21 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
         password: passwordController.text.trim(),
         gender: gender,
         imageUrl: imageUrl,
-        id: FirebaseAuth.instance.currentUser!.uid,
+        id: GlobalVariables.user.uid,
       );
       String response = await _profileUseCase.updateUserData(user);
       if (response == 'success') {
-        FirebaseAuth.instance.currentUser!
-            .updateDisplayName(fullNameController.text.trim());
-        FirebaseAuth.instance.currentUser!.updatePhotoURL(imageUrl);
-        emit(EditProfileSuccessState());
+        GlobalVariables.user.updateDisplayName(fullNameController.text.trim());
+        await GlobalVariables.user.updatePhotoURL(imageUrl);
+        await GlobalVariables.user.reload();
+        GlobalVariables.user = FirebaseAuth.instance.currentUser!;
+
+        emit(EditProfileSuccessState(user: GlobalVariables.user));
       } else {
         emit(EditProfileErrorState(
             errorMessage: 'Error while updating user data!'));
       }
     } catch (e) {
-      log(e.toString());
       emit(EditProfileErrorState(errorMessage: e.toString()));
     }
   }
