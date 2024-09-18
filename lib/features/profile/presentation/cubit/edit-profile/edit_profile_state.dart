@@ -8,6 +8,8 @@ class EditProfileLoadingState extends EditProfileStates {}
 
 class ShowPasswordState extends EditProfileStates {}
 
+class EnableEditingState extends EditProfileStates {}
+
 class PickImageSuccessState extends EditProfileStates {}
 
 class PickImageErrorState extends EditProfileStates {}
