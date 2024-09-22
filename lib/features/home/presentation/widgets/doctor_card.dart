@@ -7,8 +7,10 @@ import '../../../../core/theme/app_fonts.dart';
 import '../../domain/entities/doctor.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key, required this.doctor});
+  const DoctorCard({super.key, required this.doctor, this.width, this.height});
 
+  final double? width;
+  final double? height;
   final Doctor doctor;
 
   @override
@@ -16,23 +18,20 @@ class DoctorCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8.w),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12.r),
-              child: CachedNetworkImage(
-                imageUrl: doctor.imageUrl!,
-                width: 110.w,
-                height: 152.h,
-                fit: BoxFit.cover,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
-                  child: CircularProgressIndicator(
-                      value: downloadProgress.progress),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12.r),
+            child: CachedNetworkImage(
+              imageUrl: doctor.imageUrl!,
+              width: width?.w ?? 95.w,
+              height: height?.h ?? 120.h,
+              fit: BoxFit.cover,
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  Center(
+                child:
+                    CircularProgressIndicator(value: downloadProgress.progress),
               ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           horizontalSpace(16),
@@ -41,13 +40,15 @@ class DoctorCard extends StatelessWidget {
             children: [
               Text(
                 'Dr. ${doctor.name}',
-                style: TextStyles.font18DarkBlueBold,
+                style: TextStyles.font16DarkBlueMedium
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
+              verticalSpace(7),
               Text(
                 '${doctor.specialization} Specialist',
                 style: TextStyles.font12GrayMedium,
               ),
-              verticalSpace(12),
+              verticalSpace(7),
               Row(
                 children: [
                   const Icon(

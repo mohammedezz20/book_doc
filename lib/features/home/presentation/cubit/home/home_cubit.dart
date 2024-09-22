@@ -22,4 +22,15 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(GetDoctorsSuccessState());
     });
   }
+
+  getDoctorsSpeciality(String speciality) async {
+    emit(HomeLoadingState());
+    var response = await homeUseCases.getDoctors();
+    response.fold((l) {
+      emit(GetDoctorsErrorState(error: l));
+    }, (r) {
+      doctorsList = r.where((e) => e.specialization == speciality).toList();
+      emit(GetDoctorsSuccessState());
+    });
+  }
 }

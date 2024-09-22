@@ -17,13 +17,14 @@ class AppTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? backgroundColor;
   final TextEditingController? controller;
-  final Function(String?) validator;
+  final Function(String?)? validator;
   final Function(String)? onChanged;
   final TextAlign? textAlign;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(PointerDownEvent)? onTapOutside;
   final TextInputType? keyboardType;
   final bool? enabled;
+  final double? borderRadius;
 
   const AppTextFormField({
     super.key,
@@ -38,13 +39,14 @@ class AppTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.backgroundColor,
     this.controller,
-    required this.validator,
+    this.validator,
     this.onChanged,
     this.textAlign,
     this.inputFormatters,
     this.onTapOutside,
     this.keyboardType,
     this.enabled,
+    this.borderRadius,
   });
 
   @override
@@ -62,7 +64,7 @@ class AppTextFormField extends StatelessWidget {
                 color: ColorsManager.mainBlue,
                 width: 1.3.w,
               ),
-              borderRadius: BorderRadius.circular(16.0.r),
+              borderRadius: BorderRadius.circular(borderRadius?.r ?? 16.0.r),
             ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
@@ -70,7 +72,7 @@ class AppTextFormField extends StatelessWidget {
                 color: ColorsManager.lighterGray,
                 width: 1.3.w,
               ),
-              borderRadius: BorderRadius.circular(16.0.r),
+              borderRadius: BorderRadius.circular(borderRadius?.r ?? 16.0.r),
             ),
         disabledBorder: disabledBorder ??
             OutlineInputBorder(
@@ -78,21 +80,21 @@ class AppTextFormField extends StatelessWidget {
                 color: ColorsManager.lighterGray,
                 width: 1.3.w,
               ),
-              borderRadius: BorderRadius.circular(16.0.r),
+              borderRadius: BorderRadius.circular(borderRadius?.r ?? 16.0.r),
             ),
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.red,
             width: 1.3.w,
           ),
-          borderRadius: BorderRadius.circular(16.0.r),
+          borderRadius: BorderRadius.circular(borderRadius?.r ?? 16.0.r),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.red,
             width: 1.3.w,
           ),
-          borderRadius: BorderRadius.circular(16.0.r),
+          borderRadius: BorderRadius.circular(borderRadius?.r ?? 16.0.r),
         ),
         hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: hintText,
@@ -103,7 +105,7 @@ class AppTextFormField extends StatelessWidget {
       obscureText: isObscureText ?? false,
       style: TextStyles.font14DarkBlueMedium,
       validator: (value) {
-        return validator(value);
+        validator ?? (value) {};
       },
       onChanged: (value) {
         onChanged ?? (value) {};

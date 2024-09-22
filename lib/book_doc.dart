@@ -5,6 +5,7 @@ import 'package:book_doc/features/login/presentation/cubit/signup/sign_up_cubit.
 import 'package:book_doc/features/login/presentation/pages/auth_state.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/cubit/language/language_cubit.dart';
+import 'package:book_doc/features/search/presentation/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -31,6 +32,7 @@ class BookDoc extends StatelessWidget {
           BlocProvider(create: (context) => HomeCubit()),
           BlocProvider(create: (context) => AppointmentCubit()),
           BlocProvider(create: (context) => CompleteProfileCubit()),
+          BlocProvider(create: (context) => SearchCubit()),
         ],
         child: BlocBuilder<LanguageCubit, Locale>(
           builder: (BuildContext context, Locale state) {
