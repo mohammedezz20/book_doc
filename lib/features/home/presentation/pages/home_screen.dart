@@ -15,29 +15,28 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit()..getDoctors(),
-      child: BlocBuilder<HomeCubit, HomeStates>(
-        builder: (context, state) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                verticalSpace(10),
-                Text(
-                  'Hi, ${GlobalVariables.user!.displayName} !',
-                  style: TextStyles.font18DarkBlueBold,
-                ),
-                verticalSpace(20),
-                const CategoryList(),
-                verticalSpace(20),
-                const Expanded(child: RecommendationList()),
-              ],
-            ),
-          );
-        },
-      ),
+    var cubit = HomeCubit.get(context);
+    cubit.getDoctors();
+    return BlocBuilder<HomeCubit, HomeStates>(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              verticalSpace(10),
+              Text(
+                'Hi, ${GlobalVariables.user!.displayName} !',
+                style: TextStyles.font18DarkBlueBold,
+              ),
+              verticalSpace(20),
+              const CategoryList(),
+              verticalSpace(20),
+              const Expanded(child: RecommendationList()),
+            ],
+          ),
+        );
+      },
     );
   }
 }

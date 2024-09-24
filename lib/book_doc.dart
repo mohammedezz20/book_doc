@@ -25,20 +25,24 @@ class BookDoc extends StatelessWidget {
       minTextAdapt: true,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => LanguageCubit()),
+          BlocProvider(
+            create: (context) => LanguageCubit(),
+          ),
           BlocProvider(create: (context) => LoginCubit()),
           BlocProvider(create: (context) => SignUpCubit()),
           BlocProvider(create: (context) => AppLayoutCubit()),
-          BlocProvider(create: (context) => HomeCubit()),
+          BlocProvider(
+            create: (context) => HomeCubit(),
+          ),
           BlocProvider(create: (context) => AppointmentCubit()),
           BlocProvider(create: (context) => CompleteProfileCubit()),
           BlocProvider(create: (context) => SearchCubit()),
         ],
-        child: BlocBuilder<LanguageCubit, Locale>(
-          builder: (BuildContext context, Locale state) {
+        child: BlocBuilder<LanguageCubit, LanguageState>(
+          builder: (BuildContext context, LanguageState state) {
             log(state.toString());
             return MaterialApp(
-              locale: state,
+              locale: state.selectedLanguage,
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,

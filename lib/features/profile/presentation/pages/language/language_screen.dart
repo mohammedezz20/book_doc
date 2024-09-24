@@ -12,85 +12,87 @@ class LanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Languages',
-              style: TextStyles.font18DarkBlueBold,
-            ),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            elevation: 0,
-            centerTitle: true,
-            backgroundColor: Colors.white,
-          ),
-          backgroundColor: Colors.white,
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
-            child: Column(
-              children: [
-                Row(
+    return BlocBuilder<LanguageCubit, LanguageState>(
+      builder: (context, state) {
+        return Container(
+          color: Colors.white,
+          child: SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  'Languages',
+                  style: TextStyles.font18DarkBlueBold,
+                ),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                elevation: 0,
+                centerTitle: true,
+                backgroundColor: Colors.white,
+              ),
+              backgroundColor: Colors.white,
+              body: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+                child: Column(
                   children: [
-                    Text(
-                      'Arabic',
-                      style: TextStyles.font16DarkBlueMedium,
+                    Row(
+                      children: [
+                        Text(
+                          'Arabic',
+                          style: TextStyles.font16DarkBlueMedium,
+                        ),
+                        const Spacer(),
+                        Radio<String>(
+                          value: 'ar',
+                          groupValue: state.selectedLanguage.languageCode,
+                          activeColor: ColorsManager.mainBlue,
+                          onChanged: (value) {
+                            context
+                                .read<LanguageCubit>()
+                                .changeLanguage(Locale(value!));
+                          },
+                        ),
+                      ],
                     ),
-                    const Spacer(),
-                    Radio<String>(
-                      value: 'ar',
-                      groupValue:
-                          context.read<LanguageCubit>().state.toString(),
-                      activeColor: ColorsManager.mainBlue,
-                      onChanged: (value) {
-                        context
-                            .read<LanguageCubit>()
-                            .changeLanguage(Locale(value!));
-                      },
+                    Divider(
+                      thickness: 1.0,
+                      color: Colors.grey[300],
+                    ),
+                    verticalSpace(20),
+                    Row(
+                      children: [
+                        Text(
+                          'English',
+                          style: TextStyles.font16DarkBlueMedium,
+                        ),
+                        const Spacer(),
+                        Radio<String>(
+                          value: 'en',
+                          groupValue: state.selectedLanguage.languageCode,
+                          activeColor: ColorsManager.mainBlue,
+                          onChanged: (value) {
+                            context
+                                .read<LanguageCubit>()
+                                .changeLanguage(Locale(value!));
+                          },
+                        ),
+                      ],
+                    ),
+                    verticalSpace(12),
+                    Divider(
+                      thickness: 1.0,
+                      color: Colors.grey[300],
                     ),
                   ],
                 ),
-                Divider(
-                  thickness: 1.0,
-                  color: Colors.grey[300],
-                ),
-                verticalSpace(20),
-                Row(
-                  children: [
-                    Text(
-                      'English',
-                      style: TextStyles.font16DarkBlueMedium,
-                    ),
-                    const Spacer(),
-                    Radio<String>(
-                      value: 'en',
-                      groupValue:
-                          context.read<LanguageCubit>().state.toString(),
-                      activeColor: ColorsManager.mainBlue,
-                      onChanged: (value) {
-                        context
-                            .read<LanguageCubit>()
-                            .changeLanguage(Locale(value!));
-                      },
-                    ),
-                  ],
-                ),
-                verticalSpace(12),
-                Divider(
-                  thickness: 1.0,
-                  color: Colors.grey[300],
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

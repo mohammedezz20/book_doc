@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-class LanguageCubit extends HydratedCubit<Locale> {
-  LanguageCubit() : super(const Locale('en')); // Default locale
-  Locale selectedLanguage = const Locale('en');
+class LanguageState {
+  final Locale selectedLanguage;
+
+  LanguageState(this.selectedLanguage);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'languageCode': selectedLanguage.languageCode,
+    };
+  }
+
+  static LanguageState fromJson(Map<String, dynamic> json) {
+    return LanguageState(Locale(json['languageCode']));
+  }
+}
+
+class LanguageCubit extends HydratedCubit<LanguageState> {
+  LanguageCubit()
+      : super(LanguageState(const Locale('en'))); // Default to 'en' (English)
 
   void changeLanguage(Locale locale) {
-    selectedLanguage = locale;
-    emit(locale);
+    emit(LanguageState(locale)); // Emit the new selected language
   }
 
   @override
-  Locale? fromJson(Map<String, dynamic> json) {
-    try {
-      final languageCode = json['languageCode'] as String;
-      final countryCode = json['countryCode'] as String?;
-      return Locale(languageCode, countryCode);
-    } catch (e) {
-      return null;
-    }
+  LanguageState fromJson(Map<String, dynamic> json) {
+    return LanguageState.fromJson(json);
   }
 
   @override
-  Map<String, dynamic>? toJson(Locale state) {
-    return {
-      'languageCode': state.languageCode,
-      'countryCode': state.countryCode,
-    };
+  Map<String, dynamic>? toJson(LanguageState state) {
+    return state.toJson();
   }
 }
