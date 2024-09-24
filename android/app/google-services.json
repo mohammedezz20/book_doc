@@ -48,50 +48,6 @@
           ]
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:41199169010:android:e700cf42f1220077b2cf6b",
-        "android_client_info": {
-          "package_name": "com.example.book_doc.dev"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "41199169010-gsk2e91mr0lesorabjgojiivribthge3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.book_doc.dev",
-            "certificate_hash": "371d7375a4668ad50e4700e6ffb89380717d7364"
-          }
-        },
-        {
-          "client_id": "41199169010-vqeedgc0tc7h0au1m9peb6dg8qnmon1d.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBml9Zk--6epccuFB_DI-_4k_ef_QU28c8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "41199169010-vqeedgc0tc7h0au1m9peb6dg8qnmon1d.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "41199169010-6g1l5qlufda1cnfnqveh96oct8ljmnrs.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.bookDoc"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "configuration_version": "1"
