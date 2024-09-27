@@ -1,3 +1,4 @@
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_fonts.dart';
@@ -12,7 +13,7 @@ class AlreadyHaveAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Already have an account? ',
+          S.of(context).Already_have_an_account,
           style: TextStyles.font12DarkBlueRegular,
         ),
         GestureDetector(
@@ -25,7 +26,7 @@ class AlreadyHaveAccount extends StatelessWidget {
             );
           },
           child: Text(
-            'Sign in',
+            S.of(context).Sign_in,
             style: TextStyles.font13BlueSemiBold,
           ),
         ),

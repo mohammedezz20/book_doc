@@ -1,6 +1,7 @@
 import 'package:book_doc/core/assets/vectors/vectors.dart';
 import 'package:book_doc/features/appointments/presentation/cubit/appointment/appointment_cubit.dart';
 import 'package:book_doc/features/appointments/presentation/cubit/appointment/appointment_state.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class BookInformationWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Book Information',
+              S.of(context).Book_Information,
               style: TextStyles.font18DarkBlueSemiBold,
             ),
             verticalSpace(24),
@@ -49,7 +50,7 @@ class BookInformationWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Date & Time',
+                      S.of(context).Date_Time,
                       style: TextStyles.font14BlueSemiBold
                           .copyWith(color: ColorsManager.darkBlue),
                     ),
@@ -90,7 +91,7 @@ class BookInformationWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Appointment Type',
+                      S.of(context).Appointment_Type,
                       style: TextStyles.font14BlueSemiBold
                           .copyWith(color: ColorsManager.darkBlue),
                     ),

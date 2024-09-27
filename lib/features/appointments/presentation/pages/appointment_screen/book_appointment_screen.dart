@@ -3,6 +3,7 @@ import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/summary_appointment_screen.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/date&time_widget.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/steps_list.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,7 @@ class BookAppointmentScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Book Appointment',
+          S.of(context).Book_Appointment,
           style: TextStyles.font18DarkBlueBold,
         ),
         centerTitle: true,
@@ -44,7 +45,7 @@ class BookAppointmentScreen extends StatelessWidget {
               DateAndTimeWidget(),
               verticalSpace(20),
               AppTextButton(
-                buttonText: 'Continue',
+                buttonText: S.of(context).Continue,
                 onPressed: () {
                   Navigator.push(
                     context,

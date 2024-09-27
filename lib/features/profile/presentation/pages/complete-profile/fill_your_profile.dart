@@ -16,11 +16,12 @@ import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../app-layout/presentation/pages/app_layout.dart';
 
 class FillYourProfile extends StatelessWidget {
-  const FillYourProfile(
-      {super.key, required this.email, required this.password});
+  FillYourProfile({super.key, required this.email, required this.password});
 
   final String email;
   final String password;
+
+  var S;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +100,7 @@ class FillYourProfile extends StatelessWidget {
                       verticalSpace(20),
                       AppTextFormField(
                         controller: cubit.fullNameController,
-                        hintText: 'Full Name',
+                        hintText: S.of(context).Full_Name,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your full name';
@@ -117,7 +118,7 @@ class FillYourProfile extends StatelessWidget {
                       AppTextFormField(
                         controller: cubit.ageController,
                         keyboardType: TextInputType.number,
-                        hintText: 'Age',
+                        hintText: S.of(context).Age,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your age!';
@@ -130,7 +131,7 @@ class FillYourProfile extends StatelessWidget {
                       verticalSpace(16),
                       AppTextFormField(
                         controller: cubit.addressController,
-                        hintText: 'Address',
+                        hintText: S.of(context).Address,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your address!';
@@ -160,7 +161,7 @@ class FillYourProfile extends StatelessWidget {
                               color: ColorsManager.mainBlue,
                             )
                           : AppTextButton(
-                              buttonText: 'Submit',
+                              buttonText: S.of(context).Submit,
                               textStyle: TextStyles.font16WhiteSemiBold,
                               onPressed: () {
                                 if (cubit.formKey.currentState!.validate()) {

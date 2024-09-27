@@ -5,6 +5,7 @@ import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
 import 'package:book_doc/features/login/presentation/pages/forget-password/forget_password_screen.dart';
 import 'package:book_doc/features/profile/presentation/pages/complete-profile/fill_your_profile.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                   verticalSpace(40),
                   AppTextFormField(
                     controller: cubit.emailController,
-                    hintText: 'Email',
+                    hintText: S.of(context).Email,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a valid email!';
@@ -53,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                   verticalSpace(16),
                   AppTextFormField(
                     controller: cubit.passwordController,
-                    hintText: 'Password',
+                    hintText: S.of(context).Password,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a valid password!';
@@ -84,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                         );
                       },
                       child: Text(
-                        'Forget Password?',
+                        S.of(context).Forget_Password,
                         style: TextStyles.font13BlueRegular,
                       ),
                     ),
@@ -95,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                           color: ColorsManager.mainBlue,
                         )
                       : AppTextButton(
-                          buttonText: 'Login',
+                          buttonText: S.of(context).Login,
                           textStyle: TextStyles.font16WhiteSemiBold,
                           onPressed: () {
                             cubit.login();
@@ -124,8 +125,8 @@ class LoginScreen extends StatelessWidget {
                   );
                 } else if (state is LoginSuccessState) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Signed in successfully'),
+                    SnackBar(
+                      content: Text(S.of(context).Signed_in_successfully),
                     ),
                   );
                   GlobalVariables.user = FirebaseAuth.instance.currentUser;

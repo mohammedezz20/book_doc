@@ -1,5 +1,6 @@
 import 'package:book_doc/features/login/presentation/cubit/signup/sign_up_cubit.dart';
 import 'package:book_doc/features/login/presentation/pages/signup/sign_up_screen.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +31,7 @@ class DontHaveAccountText extends StatelessWidget {
             );
           },
           child: Text(
-            'Sign Up',
+            S.of(context).Sign_Up,
             style: TextStyles.font13BlueSemiBold,
           ),
         ),

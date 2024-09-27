@@ -1,4 +1,5 @@
 import 'package:book_doc/core/theme/app_colors.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_fonts.dart';
@@ -25,12 +26,12 @@ class AppointmentTabList extends StatelessWidget {
             labelColor: ColorsManager.mainBlue,
             unselectedLabelColor: Colors.grey,
             indicatorColor: ColorsManager.mainBlue,
-            tabs: const [
+            tabs: [
               Tab(
-                text: 'Upcoming',
+                text: S.of(context).Upcoming,
               ),
-              Tab(text: 'Completed'),
-              Tab(text: 'Cancelled'),
+              Tab(text: S.of(context).Completed),
+              Tab(text: S.of(context).Cancelled),
             ],
             labelStyle: TextStyles.font16WhiteSemiBold
                 .copyWith(color: ColorsManager.gray),

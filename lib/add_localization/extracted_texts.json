@@ -1,0 +1,297 @@
+[
+  {
+    "book_doc.dart": {
+      "title_Book_Doc": "Book Doc"
+    }
+  },
+  {
+    "fill_your_profile_text.dart": {
+      "Text_Fill_Your_Profile": "Fill Your Profile",
+      "RichText_Please_take_a_few_minutes_to_fill_out_your_profile_with_as_much_detail_as_possible": "Please take a few minutes to fill out your profile with as much detail as possible.",
+      "TextSpan_Please_take_a_few_minutes_to_fill_out_your_profile_with_as_much_detail_as_possible": "Please take a few minutes to fill out your profile with as much detail as possible."
+    }
+  },
+  {
+    "profile_app_bar.dart": {
+      "Text_Profile": "Profile"
+    }
+  },
+  {
+    "profile_screen.dart": {
+      "Text_Personal_Information": "Personal Information"
+    }
+  },
+  {
+    "edit_profile.dart": {
+      "Text_Personal_Information": "Personal Information",
+      "SnackBar_Profile_updated_successfully": "Profile updated successfully.",
+      "hintText_Full_Name": "Full Name",
+      "hintText_Password": "Password",
+      "hintText_Age": "Age",
+      "hintText_Address": "Address",
+      "buttonText_Save": "Save"
+    }
+  },
+  {
+    "language_screen.dart": {
+      "Text_Languages": "Languages",
+      "Text_Arabic": "Arabic",
+      "Text_English": "English"
+    }
+  },
+  {
+    "settings_screen.dart": {
+      "Text_Settings": "Settings",
+      "Text_Language": "Language",
+      "Text_Logout": "Logout",
+      "Text_Are_you_sure_you_want_to_logout": "Are you sure you want to logout?",
+      "Text_Cancel": "Cancel",
+      "Text_Signed_out_successfully": "Signed out successfully"
+    }
+  },
+  {
+    "fill_your_profile.dart": {
+      "hintText_Full_Name": "Full Name",
+      "hintText_Age": "Age",
+      "hintText_Address": "Address",
+      "buttonText_Submit": "Submit"
+    }
+  },
+  {
+    "seach_screen.dart": {
+      "Text_Search": "Search",
+      "Text_founds": "${cubit.searchResults.length} founds",
+      "Text_There_is_no_doctor_with_this_name": "There is no doctor with this name.",
+      "Text_Search_for_doctors": "Search for doctors",
+      "hintText_search_for_doctors": "search for doctors"
+    }
+  },
+  {
+    "create_account_text.dart": {
+      "Text_Create_Account": "Create Account",
+      "RichText_Sign_up_now_and_start_exploring_all_that_our_app_has_to_offer_We": "Sign up now and start exploring all that our app has to offer. We\re excited to welcome you to our community!"
+    }
+  },
+  {
+    "dont_have_account_text.dart": {
+      "Text_Sign_Up": "Sign Up",
+      "Text_Donot_have_an_account_yet": "Don\\'t have an account yet?"
+    }
+  },
+  {
+    "sign_in_divider.dart": {
+      "Text_or_sign_in_with": "or sign in with"
+    }
+  },
+  {
+    "already_have_account.dart": {
+      "Text_Already_have_an_account": "Already have an account? ",
+      "Text_Sign_in": "Sign in"
+    }
+  },
+  {
+    "welcome_text.dart": {
+      "Text_Welcome_Back": "Welcome Back",
+      "RichText_We": "We 're excited to have you back, can't wait to see what you've been up to since you last logged in."
+    }
+  },
+  {
+    "terms&conditons_text.dart": {
+      "RichText_By_logging_you_agree_to_our": "By logging, you agree to our ",
+      "TextSpan_Terms_Conditions": "Terms & Conditions",
+      "TextSpan_and": " and ",
+      "TextSpan_Privacy_Policy": "Privacy Policy."
+    }
+  },
+  {
+    "forget_password_screen.dart": {
+      "Text_Forget_Password": "Forget Password",
+      "Text_Password_Reset": "Password Reset",
+      "Text_Check_your_Gmail_inbox_for_password_reset_link": "Check your Gmail inbox for password reset link !!!",
+      "Text_OK": "OK",
+      "Text_Cancel": "Cancel",
+      "RichText_At_our_app_we_take_the_security_of_your_information_seriously": "At our app, we take the security of your information seriously.",
+      "SnackBar_Check_your_Gmail_inbox_for_password_reset_link": "Check your Gmail inbox for password reset link !!!",
+      "hintText_Email": "Email",
+      "buttonText_Reset_Password": "Reset Password"
+    }
+  },
+  {
+    "sign_up_screen.dart": {
+      "Text_Account_created_successfully": "Account created successfully!",
+      "hintText_Email": "Email",
+      "hintText_Password": "Password",
+      "hintText_Confirm_password": "Confirm password",
+      "buttonText_Create_Account": "Create Account"
+    }
+  },
+  {
+    "login_screen.dart": {
+      "Text_Forget_Password": "Forget Password?",
+      "Text_Signed_in_successfully": "Signed in successfully",
+      "hintText_Email": "Email",
+      "hintText_Password": "Password",
+      "buttonText_Login": "Login"
+    }
+  },
+  {
+    "tab_list_widget.dart": {
+      "text_About": "About",
+      "text_Location": "Location",
+      "text_Reviews": "Reviews"
+    }
+  },
+  {
+    "recommendation_list.dart": {
+      "Text_Recommended_Doctors": "Recommended Doctors",
+      "Text_See_All": "See All"
+    }
+  },
+  {
+    "doctor_card.dart": {
+      "Text_Dr": "Dr. ${doctor.name}",
+      "Text_Specialist": "${doctor.specialization} Specialist"
+    }
+  },
+  {
+    "category_list.dart": {
+      "Text_Doctor_Speciality": "Doctor Speciality",
+      "Text_See_All": "See All"
+    }
+  },
+  {
+    "about_me_widget.dart": {
+      "Text_About_Me": "About Me",
+      "Text_Working_Time": "Working Time",
+      "Text_Monday_Friday_9_00_AM_5_00_PM": "Monday - Friday: 9:00 AM - 5:00 PM",
+      "Text_Contact_Information": "Contact Information",
+      "Text_": "${doctor.address}",
+      "Text_Address": "Address",
+      "RichText_": "${doctor.bio}",
+      "TextSpan_": "${doctor.bio}"
+    }
+  },
+  {
+    "cancelled_list.dart": {
+      "Text_Error": "Error: ${state.error.toString()}"
+    }
+  },
+  {
+    "appointment_tab_list.dart": {
+      "text_Upcoming": "Upcoming",
+      "text_Completed": "Completed",
+      "text_Cancelled": "Cancelled"
+    }
+  },
+  {
+    "appointment_item.dart": {
+      "Text_": "|",
+      "Text_Dr": "Dr. ${appointment.doctor.name}",
+      "Text_Specialist": "${appointment.doctor.specialization} Specialist"
+    }
+  },
+  {
+    "upcoming_appointment_item.dart": {
+      "Text_Dr": "Dr. ${appointment.doctor.name}",
+      "Text_Specialist": "${appointment.doctor.specialization} Specialist",
+      "Text_": "|",
+      "buttonText_Cancel_Appointment": "Cancel Appointment",
+      "buttonText_Reschedule": "Reschedule"
+    }
+  },
+  {
+    "my_appointments_screen.dart": {
+      "Text_My_Appointments": "My Appointments"
+    }
+  },
+  {
+    "upcoming_list.dart": {
+      "Text_Error": "Error: ${state.error.toString()}",
+      "status_Appointment_Cancelled": "Appointment Cancelled"
+    }
+  },
+  {
+    "completed_list.dart": {
+      "Text_Error": "Error: ${state.error.toString()}"
+    }
+  },
+  {
+    "summary_appointment_screen.dart": {
+      "Text_Book_Appointment": "Book Appointment",
+      "Text_Doctor_Information": "Doctor Information",
+      "Text_Appointment_Booked_Successfully": "Appointment Booked Successfully",
+      "Text_Appointment_updated_successfully": "Appointment updated successfully",
+      "buttonText_Book_Now": "Book Now",
+      "buttonText_Update_Appointment": "Update Appointment",
+      "status_Appointment_Upcoming": "Appointment Upcoming"
+    }
+  },
+  {
+    "reschedule_appointment_screen.dart": {
+      "Text_Reschedule_Appointment": "Reschedule Appointment",
+      "buttonText_Continue": "Continue"
+    }
+  },
+  {
+    "book_appointment_screen.dart": {
+      "Text_Book_Appointment": "Book Appointment",
+      "buttonText_Continue": "Continue"
+    }
+  },
+  {
+    "steps_list.dart": {
+      "number_1": "1",
+      "stepName_Date_Time": "Date & Time",
+      "number_2": "2",
+      "stepName_Summary": "Summary"
+    }
+  },
+  {
+    "date&time_widget.dart": {
+      "Text_Select_Date": "Select Date",
+      "Text_Available_Time": "Available Time",
+      "Text_Appointment_Type": "Appointment Type"
+    }
+  },
+  {
+    "confirmed_widget.dart": {
+      "Text_Booking_Confirmed": "Booking Confirmed"
+    }
+  },
+  {
+    "book_information_widget.dart": {
+      "Text_Book_Information": "Book Information",
+      "Text_Date_Time": "Date & Time",
+      "Text_Appointment_Type": "Appointment Type"
+    }
+  },
+  {
+    "category_screen.dart": {
+      "Text_Doctor_Speciality": "Doctor Speciality"
+    }
+  },
+  {
+    "home_screen.dart": {
+      "Text_Hi": "Hi, ${GlobalVariables.user!.displayName} !"
+    }
+  },
+  {
+    "recommendation_doctor_screen.dart": {
+      "Text_Recommended_Doctors": "Recommended Doctors",
+      "hintText_Search": "Search"
+    }
+  },
+  {
+    "doctor_details_screen.dart": {
+      "Text_Dr": "Dr. ${doctor.name}",
+      "buttonText_Make_An_Appointment": "Make An Appointment"
+    }
+  },
+  {
+    "phone_text_field.dart": {
+      "isoCode_EG": "EG",
+      "hintText_WhatsApp_Number": "WhatsApp Number",
+      "hintText_Search_country": "Search country"
+    }
+  }
+]

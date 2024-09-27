@@ -1,6 +1,7 @@
 import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/pages/complete-profile/fill_your_profile.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
                       verticalSpace(40),
                       AppTextFormField(
                         controller: cubit.emailController,
-                        hintText: 'Email',
+                        hintText: S.of(context).Email,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter a valid email!';
@@ -56,7 +57,7 @@ class SignUpScreen extends StatelessWidget {
                       verticalSpace(16),
                       AppTextFormField(
                         controller: cubit.passwordController,
-                        hintText: 'Password',
+                        hintText: S.of(context).Password,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a valid password!';
@@ -80,7 +81,7 @@ class SignUpScreen extends StatelessWidget {
                       verticalSpace(16),
                       AppTextFormField(
                         controller: cubit.confirmPasswordController,
-                        hintText: 'Confirm password',
+                        hintText: S.of(context).Confirm_password,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a valid password!';
@@ -108,7 +109,7 @@ class SignUpScreen extends StatelessWidget {
                               color: ColorsManager.mainBlue,
                             )
                           : AppTextButton(
-                              buttonText: 'Create Account',
+                              buttonText: S.of(context).Create_Account,
                               textStyle: TextStyles.font16WhiteSemiBold,
                               onPressed: () {
                                 if (cubit.formKey.currentState!.validate()) {
@@ -129,8 +130,8 @@ class SignUpScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is SignUpSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Account created successfully!'),
+                SnackBar(
+                  content: Text(S.of(context).Account_created_successfully),
                 ),
               );
               Navigator.pushReplacement(

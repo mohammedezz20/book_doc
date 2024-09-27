@@ -1,4 +1,5 @@
 import 'package:book_doc/core/widgets/app_text_field.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class RecommendationDoctorScreen extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 title: Text(
-                  'Recommended Doctors',
+                  S.of(context).Recommended_Doctors,
                   style: TextStyles.font18DarkBlueBold,
                 ),
                 centerTitle: true,
@@ -43,7 +44,7 @@ class RecommendationDoctorScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     AppTextFormField(
-                      hintText: 'Search',
+                      hintText: S.of(context).Search,
                       validator: (value) {},
                     ),
                     verticalSpace(20),

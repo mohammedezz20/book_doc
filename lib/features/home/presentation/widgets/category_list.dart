@@ -1,5 +1,6 @@
 import 'package:book_doc/core/assets/images/images.dart';
 import 'package:book_doc/features/home/presentation/widgets/category_item.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';
@@ -34,7 +35,7 @@ class CategoryList extends StatelessWidget {
         ListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(
-            'Doctor Speciality',
+            S.of(context).Doctor_Speciality,
             style: TextStyles.font18DarkBlueSemiBold,
           ),
           trailing: InkWell(
@@ -44,7 +45,7 @@ class CategoryList extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => CategoryScreen()));
             },
             child: Text(
-              'See All',
+              S.of(context).See_All,
               style: TextStyles.font12BlueRegular,
             ),
           ),

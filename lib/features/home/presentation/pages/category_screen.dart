@@ -1,3 +1,4 @@
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -67,7 +68,7 @@ class CategoryScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              'Doctor Speciality',
+              S.of(context).Doctor_Speciality,
               style: TextStyles.font18DarkBlueBold,
             ),
             leading: IconButton(

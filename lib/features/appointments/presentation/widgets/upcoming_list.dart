@@ -2,6 +2,7 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/features/appointments/presentation/cubit/appointment/appointment_cubit.dart';
 import 'package:book_doc/features/appointments/presentation/cubit/appointment/appointment_state.dart';
 import 'package:book_doc/features/appointments/presentation/widgets/upcoming_appointment_item.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +30,7 @@ class UpcomingList extends StatelessWidget {
         } else if (state is GetUpcomingAppointmentsErrorStateState) {
           return Center(
             child: Text(
-              "Error: ${state.error.toString()}",
+              S.of(context).Error(state.error.toString()),
               style: TextStyles.font13DarkBlueMedium,
             ),
           );
@@ -42,7 +43,7 @@ class UpcomingList extends StatelessWidget {
                 onPressed: () {
                   cubit.updateAppointmentStatus(
                       id: cubit.upcomingAppointmentsList[index].id,
-                      status: 'Appointment Cancelled');
+                      status: S.of(context).Appointment_Cancelled);
                   cubit.getUpcomingAppointments();
                 },
               ),

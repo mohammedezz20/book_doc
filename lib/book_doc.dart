@@ -6,6 +6,7 @@ import 'package:book_doc/features/login/presentation/pages/auth_state.dart';
 import 'package:book_doc/features/profile/presentation/cubit/complete_profile/complete_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/cubit/language/language_cubit.dart';
 import 'package:book_doc/features/search/presentation/cubit/search_cubit.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,11 +45,12 @@ class BookDoc extends StatelessWidget {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              supportedLocales: const [
-                Locale('en'),
-                Locale('ar'),
-              ],
-              title: 'Book Doc',
+              // supportedLocales: const [
+              //   Locale('en'),
+              //   Locale('ar'),
+              // ],
+              supportedLocales: S.delegate.supportedLocales,
+              title: S.of(context).Book_Doc,
               debugShowCheckedModeBanner: false,
               home: const AuthState(),
             );

@@ -4,6 +4,7 @@ import 'package:book_doc/core/theme/app_fonts.dart';
 import 'package:book_doc/features/appointments/presentation/cubit/appointment/appointment_cubit.dart';
 import 'package:book_doc/features/appointments/presentation/cubit/appointment/appointment_state.dart';
 import 'package:book_doc/features/appointments/presentation/widgets/appointment_item.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class CompletedList extends StatelessWidget {
         } else if (state is GetCompletedAppointmentsErrorStateState) {
           return Center(
             child: Text(
-              "Error: ${state.error.toString()}",
+              S.of(context).Error(state.error.toString()),
               style: TextStyles.font13DarkBlueMedium,
             ),
           );

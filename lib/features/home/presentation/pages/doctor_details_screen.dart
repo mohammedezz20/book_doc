@@ -2,6 +2,7 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/features/home/presentation/widgets/about_me_widget.dart';
 import 'package:book_doc/features/home/presentation/widgets/doctor_card.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +21,7 @@ class DoctorDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Dr. ${doctor.name}',
+          S.of(context).Dr(doctor.name ?? ""),
           style: TextStyles.font18DarkBlueBold,
         ),
         centerTitle: true,
@@ -62,7 +63,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                 ),
               ),
               AppTextButton(
-                buttonText: 'Make An Appointment',
+                buttonText: S.of(context).Make_An_Appointment,
                 textStyle: TextStyles.font16WhiteSemiBold,
                 onPressed: () {
                   Navigator.push(

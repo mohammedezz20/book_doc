@@ -1,4 +1,5 @@
 import 'package:book_doc/core/helpers/spacing.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,13 +40,13 @@ class DoctorCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Dr. ${doctor.name}',
+                S.of(context).Dr(doctor.name ?? ""),
                 style: TextStyles.font16DarkBlueMedium
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               verticalSpace(7),
               Text(
-                '${doctor.specialization} Specialist',
+                S.of(context).Specialist(doctor.specialization ?? ""),
                 style: TextStyles.font12GrayMedium,
               ),
               verticalSpace(7),

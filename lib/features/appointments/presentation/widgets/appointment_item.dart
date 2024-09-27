@@ -1,5 +1,6 @@
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/features/appointments/domain/entities/appointment_model.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,7 @@ class AppointmentItem extends StatelessWidget {
                   ),
                   horizontalSpace(10),
                   Text(
-                    '|',
+                    S.of(context).Appointment_Type,
                     style: TextStyles.font12GrayMedium,
                   ),
                   horizontalSpace(10),
@@ -92,11 +93,13 @@ class AppointmentItem extends StatelessWidget {
                 children: [
                   verticalSpace(6),
                   Text(
-                    'Dr. ${appointment.doctor.name}',
+                    S.of(context).Dr(appointment.doctor.name!),
                     style: TextStyles.font18DarkBlueBold,
                   ),
                   Text(
-                    '${appointment.doctor.specialization} Specialist',
+                    S
+                        .of(context)
+                        .Specialist(appointment.doctor.specialization!),
                     style: TextStyles.font12GrayMedium,
                   ),
                   verticalSpace(12),

@@ -6,6 +6,7 @@ import 'package:book_doc/features/appointments/presentation/widgets/appointment_
 import 'package:book_doc/features/appointments/presentation/widgets/cancelled_list.dart';
 import 'package:book_doc/features/appointments/presentation/widgets/completed_list.dart';
 import 'package:book_doc/features/appointments/presentation/widgets/upcoming_list.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +23,7 @@ class MyAppointmentsScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'My Appointments',
+                S.of(context).My_Appointments,
                 style: TextStyles.font18DarkBlueSemiBold,
               ),
               verticalSpace(30),

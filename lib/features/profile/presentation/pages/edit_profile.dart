@@ -1,6 +1,7 @@
 import 'package:book_doc/core/widgets/custom_cached_network_image.dart';
 import 'package:book_doc/features/profile/presentation/cubit/edit-profile/edit_profile_cubit.dart';
 import 'package:book_doc/features/profile/presentation/cubit/edit-profile/edit_profile_state.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class EditProfileScreen extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 title: Text(
-                  'Personal Information',
+                  S.of(context).Personal_Information,
                   style: TextStyles.font18DarkBlueBold,
                 ),
                 leading: IconButton(
@@ -134,7 +135,7 @@ class EditProfileScreen extends StatelessWidget {
                       AppTextFormField(
                         enabled: cubit.isEditable,
                         controller: cubit.fullNameController,
-                        hintText: 'Full Name',
+                        hintText: S.of(context).Full_Name,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your full name';
@@ -152,7 +153,7 @@ class EditProfileScreen extends StatelessWidget {
                       AppTextFormField(
                         enabled: cubit.isEditable,
                         controller: cubit.passwordController,
-                        hintText: 'Password',
+                        hintText: S.of(context).Password,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a valid password!';
@@ -175,7 +176,7 @@ class EditProfileScreen extends StatelessWidget {
                         enabled: cubit.isEditable,
                         controller: cubit.ageController,
                         keyboardType: TextInputType.number,
-                        hintText: 'Age',
+                        hintText: S.of(context).Age,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your age!';
@@ -189,7 +190,7 @@ class EditProfileScreen extends StatelessWidget {
                       AppTextFormField(
                         enabled: cubit.isEditable,
                         controller: cubit.addressController,
-                        hintText: 'Address',
+                        hintText: S.of(context).Address,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your address!';
@@ -207,7 +208,7 @@ class EditProfileScreen extends StatelessWidget {
                                   color: ColorsManager.mainBlue,
                                 )
                               : AppTextButton(
-                                  buttonText: 'Save',
+                                  buttonText: S.of(context).Save,
                                   textStyle: TextStyles.font16WhiteSemiBold,
                                   onPressed: () {
                                     cubit.editUserData();
@@ -230,8 +231,8 @@ class EditProfileScreen extends StatelessWidget {
           );
         } else if (state is EditProfileSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Profile updated successfully.'),
+            SnackBar(
+              content: Text(S.of(context).Profile_updated_successfully),
             ),
           );
           Future.delayed(const Duration(seconds: 2)).then((value) {

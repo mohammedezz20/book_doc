@@ -1,3 +1,4 @@
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +14,7 @@ class CreateAccountText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Create Account',
+          S.of(context).Create_Account,
           style: TextStyles.font24BlueBold,
         ),
         verticalSpace(6),

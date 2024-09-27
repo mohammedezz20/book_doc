@@ -1,5 +1,6 @@
 import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/theme/app_fonts.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,7 @@ class SignInDivider extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0.w),
           child: Text(
-            'or sign in with',
+            S.of(context).or_sign_in_with,
             style: TextStyles.font12GrayRegular,
           ),
         ),

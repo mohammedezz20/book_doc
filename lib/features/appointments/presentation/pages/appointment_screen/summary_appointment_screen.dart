@@ -5,6 +5,7 @@ import 'package:book_doc/features/appointments/presentation/cubit/appointment/ap
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/book_information_widget.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/confirmed_widget.dart';
 import 'package:book_doc/features/home/presentation/widgets/doctor_card.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class SummaryAppointmentScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Book Appointment',
+              S.of(context).Book_Appointment,
               style: TextStyles.font18DarkBlueBold,
             ),
             centerTitle: true,
@@ -63,7 +64,7 @@ class SummaryAppointmentScreen extends StatelessWidget {
                   type: cubit.appointmentType,
                 ),
                 verticalSpace(20),
-                Text('Doctor Information',
+                Text(S.of(context).Doctor_Information,
                     style: TextStyles.font18DarkBlueSemiBold),
                 verticalSpace(16),
                 DoctorCard(doctor: doctor),
@@ -75,13 +76,13 @@ class SummaryAppointmentScreen extends StatelessWidget {
                       ))
                     : isBooking
                         ? AppTextButton(
-                            buttonText: 'Book Now',
+                            buttonText: S.of(context).Book_Now,
                             onPressed: () {
                               cubit.doctor = doctor;
                               cubit.bookAppointment();
                             })
                         : AppTextButton(
-                            buttonText: 'Update Appointment',
+                            buttonText: S.of(context).Update_Appointment,
                             onPressed: () {
                               AppointmentModel appointment = AppointmentModel(
                                   id: currentAppointment!.id,
@@ -91,7 +92,7 @@ class SummaryAppointmentScreen extends StatelessWidget {
                                       Timestamp.fromDate(cubit.appointmentDate),
                                   appointmentTime: cubit.appointmentTime,
                                   appointmentType: cubit.appointmentType,
-                                  status: 'Appointment Upcoming');
+                                  status: S.of(context).Appointment_Upcoming);
                               cubit.updateAppointment(appointment);
                             },
                           ),
@@ -103,8 +104,8 @@ class SummaryAppointmentScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is BookAppointmentSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Appointment Booked Successfully'),
+            SnackBar(
+              content: Text(S.of(context).Appointment_Booked_Successfully),
             ),
           );
           Navigator.pushReplacement(
@@ -123,8 +124,8 @@ class SummaryAppointmentScreen extends StatelessWidget {
         }
         if (state is UpdateAppointmentSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Appointment updated successfully'),
+            SnackBar(
+              content: Text(S.of(context).Appointment_updated_successfully),
             ),
           );
           Navigator.pushReplacement(

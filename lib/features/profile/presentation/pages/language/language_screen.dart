@@ -1,4 +1,5 @@
 import 'package:book_doc/features/profile/presentation/cubit/language/language_cubit.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +19,7 @@ class LanguageScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              'Languages',
+              S.of(context).Languages,
               style: TextStyles.font18DarkBlueBold,
             ),
             leading: IconButton(
@@ -39,7 +40,7 @@ class LanguageScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Arabic',
+                      S.of(context).Arabic,
                       style: TextStyles.font16DarkBlueMedium,
                     ),
                     const Spacer(),
@@ -64,7 +65,7 @@ class LanguageScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'English',
+                      S.of(context).English,
                       style: TextStyles.font16DarkBlueMedium,
                     ),
                     const Spacer(),

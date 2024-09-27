@@ -1,5 +1,6 @@
 import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/features/appointments/domain/entities/appointment_model.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/theme/app_fonts.dart';
@@ -20,7 +21,7 @@ class DateAndTimeWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Select Date',
+              S.of(context).Select_Date,
               style: TextStyles.font18DarkBlueSemiBold,
             ),
             // Text(
@@ -35,7 +36,7 @@ class DateAndTimeWidget extends StatelessWidget {
         ),
         verticalSpace(24),
         Text(
-          'Available Time',
+          S.of(context).Available_Time,
           style: TextStyles.font18DarkBlueSemiBold,
         ),
         verticalSpace(24),
@@ -44,7 +45,7 @@ class DateAndTimeWidget extends StatelessWidget {
         ),
         verticalSpace(24),
         Text(
-          'Appointment Type',
+          S.of(context).Appointment_Type,
           style: TextStyles.font18DarkBlueSemiBold,
         ),
         verticalSpace(24),

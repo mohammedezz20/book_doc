@@ -4,6 +4,7 @@ import 'package:book_doc/core/widgets/app_text_field.dart';
 import 'package:book_doc/features/search/presentation/cubit/search_cubit.dart';
 import 'package:book_doc/features/search/presentation/cubit/search_state.dart';
 import 'package:book_doc/features/search/presentation/widgets/result_list.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ class SearchScreen extends StatelessWidget {
           return Column(
             children: [
               Text(
-                'Search',
+                S.of(context).Search,
                 style: TextStyles.font18DarkBlueSemiBold,
               ),
               verticalSpace(30),
@@ -49,7 +50,7 @@ class SearchScreen extends StatelessWidget {
                       child: AppTextFormField(
                         borderRadius: 30,
                         controller: cubit.searchController,
-                        hintText: 'search for doctors',
+                        hintText: S.of(context).search_for_doctors,
                         onTapOutside: (p0) {
                           cubit.search();
                           FocusScope.of(context).unfocus();
@@ -80,7 +81,7 @@ class SearchScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${cubit.searchResults.length} founds',
+                            S.of(context).founds(cubit.searchResults.length),
                             style: TextStyles.font18DarkBlueSemiBold,
                           ),
                           verticalSpace(10),
@@ -94,7 +95,7 @@ class SearchScreen extends StatelessWidget {
                   : cubit.searchResults.isEmpty
                       ? Center(
                           child: Text(
-                            'There is no doctor with this name.',
+                            S.of(context).There_is_no_doctor_with_this_name,
                             style: TextStyles.font13DarkBlueRegular,
                           ),
                         )
@@ -112,7 +113,7 @@ class SearchScreen extends StatelessWidget {
                               ? const Center(child: CircularProgressIndicator())
                               : Center(
                                   child: Text(
-                                    'Search for doctors',
+                                    S.of(context).Search_for_doctors,
                                     style: TextStyles.font14LightGrayRegular,
                                   ),
                                 ),

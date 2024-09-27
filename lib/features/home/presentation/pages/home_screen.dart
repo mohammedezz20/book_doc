@@ -2,6 +2,7 @@ import 'package:book_doc/core/helpers/spacing.dart';
 import 'package:book_doc/core/shared/global-variables.dart';
 import 'package:book_doc/core/theme/app_fonts.dart';
 import 'package:book_doc/features/home/presentation/widgets/recommendation_list.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 verticalSpace(10),
                 Text(
-                  'Hi, ${GlobalVariables.user!.displayName} !',
+                  S.of(context).Hi(GlobalVariables.user!.displayName ?? ""),
                   style: TextStyles.font18DarkBlueBold,
                 ),
                 verticalSpace(20),

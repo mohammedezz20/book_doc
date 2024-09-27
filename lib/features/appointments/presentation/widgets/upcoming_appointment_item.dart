@@ -2,6 +2,7 @@ import 'package:book_doc/core/theme/app_colors.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/features/appointments/domain/entities/appointment_model.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/reschedule_appointment_screen.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,11 +54,13 @@ class UpcomingAppointmentItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Dr. ${appointment.doctor.name}',
+                      S.of(context).Dr(appointment.doctor.name!),
                       style: TextStyles.font18DarkBlueBold,
                     ),
                     Text(
-                      '${appointment.doctor.specialization} Specialist',
+                      S
+                          .of(context)
+                          .Specialist(appointment.doctor.specialization!),
                       style: TextStyles.font12GrayMedium,
                     ),
                     verticalSpace(12),
@@ -70,7 +73,7 @@ class UpcomingAppointmentItem extends StatelessWidget {
                         ),
                         horizontalSpace(5),
                         Text(
-                          '|',
+                          "|",
                           style: TextStyles.font12GrayMedium,
                         ),
                         horizontalSpace(5),
@@ -122,7 +125,7 @@ class UpcomingAppointmentItem extends StatelessWidget {
             children: [
               Expanded(
                 child: AppTextButton(
-                  buttonText: 'Cancel Appointment',
+                  buttonText: S.of(context).Cancel_Appointment,
                   onPressed: onPressed,
                   backgroundColor: Colors.white,
                   textStyle: TextStyles.font13BlueSemiBold,
@@ -132,7 +135,7 @@ class UpcomingAppointmentItem extends StatelessWidget {
               horizontalSpace(16),
               Expanded(
                 child: AppTextButton(
-                  buttonText: 'Reschedule',
+                  buttonText: S.of(context).Reschedule,
                   onPressed: () {
                     Navigator.push(
                       context,

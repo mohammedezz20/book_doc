@@ -2,6 +2,7 @@ import 'package:book_doc/core/theme/app_fonts.dart';
 import 'package:book_doc/core/widgets/app_text_button.dart';
 import 'package:book_doc/core/widgets/app_text_field.dart';
 import 'package:book_doc/features/login/presentation/pages/login/login_screen.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       children: [
                         verticalSpace(50),
                         Text(
-                          'Forget Password',
+                          S.of(context).Forget_Password,
                           style: TextStyles.font24BlueBold,
                         ),
                         verticalSpace(6),
@@ -41,8 +42,9 @@ class ForgetPasswordScreen extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text:
-                                    'At our app, we take the security of your information seriously.',
+                                text: S
+                                    .of(context)
+                                    .At_our_app_we_take_the_security_of_your_information_seriously,
                                 style: TextStyles.font14GrayRegular
                                     .copyWith(height: 1.5.h),
                               ),
@@ -52,7 +54,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                         verticalSpace(40),
                         AppTextFormField(
                             controller: cubit.emailController,
-                            hintText: 'Email',
+                            hintText: S.of(context).Email,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Email is required';
@@ -72,7 +74,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             alignment: Alignment.center,
                             child: const CircularProgressIndicator())
                         : AppTextButton(
-                            buttonText: "Reset Password",
+                            buttonText: S.of(context).Reset_Password,
                             textStyle: TextStyles.font16WhiteSemiBold,
                             onPressed: () {
                               cubit.forgetPassword();
@@ -90,11 +92,13 @@ class ForgetPasswordScreen extends StatelessWidget {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        'Password Reset',
+                        S.of(context).Password_Reset,
                         style: TextStyles.font15DarkBlueMedium,
                       ),
                       content: Text(
-                        'Check your Gmail inbox for password reset link !!!',
+                        S
+                            .of(context)
+                            .Check_your_Gmail_inbox_for_password_reset_link,
                         style: TextStyles.font12DarkBlueRegular,
                       ),
                       actions: [
@@ -105,28 +109,29 @@ class ForgetPasswordScreen extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (context) => BlocProvider(
                                   create: (context) => LoginCubit(),
-                                  child: LoginScreen(),
+                                  child: const LoginScreen(),
                                 ),
                               ),
                             );
                           },
-                          child: const Text('OK'),
+                          child: Text(S.of(context).OK),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('Cancel'),
+                          child: Text(S.of(context).Cancel),
                         ),
                       ],
                     );
                   });
 
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  duration: Duration(seconds: 5),
-                  content: Text(
-                      'Check your Gmail inbox for password reset link !!!'),
+                SnackBar(
+                  duration: const Duration(seconds: 5),
+                  content: Text(S
+                      .of(context)
+                      .Check_your_Gmail_inbox_for_password_reset_link),
                 ),
               );
             } else if (state is SubmitPasswordResetErrorState) {

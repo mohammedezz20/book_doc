@@ -1,4 +1,5 @@
 import 'package:book_doc/core/theme/app_fonts.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,7 @@ class ProfileAppBar extends StatelessWidget {
         children: [
           const Spacer(),
           Text(
-            'Profile',
+            S.of(context).Profile,
             style:
                 TextStyles.font18DarkBlueSemiBold.copyWith(color: Colors.white),
           ),

@@ -1,3 +1,4 @@
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,14 +13,16 @@ class TermsAndConditionsText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-              text: 'By logging, you agree to our ',
+              text: S.of(context).By_logging_you_agree_to_our,
               style: TextStyles.font12GrayRegular),
           TextSpan(
-              text: 'Terms & Conditions',
+              text: S.of(context).Terms_Conditions,
               style: TextStyles.font12DarkBlueRegular),
-          TextSpan(text: ' and ', style: TextStyles.font12GrayRegular),
           TextSpan(
-              text: 'Privacy Policy.', style: TextStyles.font12DarkBlueRegular),
+              text: S.of(context).and, style: TextStyles.font12GrayRegular),
+          TextSpan(
+              text: S.of(context).Privacy_Policy,
+              style: TextStyles.font12DarkBlueRegular),
         ],
         style: TextStyle(height: 1.5.h),
       ),

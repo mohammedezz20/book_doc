@@ -1,3 +1,4 @@
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +14,7 @@ class FillYourProfileText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Fill Your Profile',
+          S.of(context).Fill_Your_Profile,
           style: TextStyles.font24BlueBold,
         ),
         verticalSpace(6),
@@ -21,8 +22,9 @@ class FillYourProfileText extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text:
-                    'Please take a few minutes to fill out your profile with as much detail as possible.',
+                text: S
+                    .of(context)
+                    .Please_take_a_few_minutes_to_fill_out_your_profile_with_as_much_detail_as_possible,
                 style: TextStyles.font14GrayRegular.copyWith(height: 1.5.h),
               ),
             ],

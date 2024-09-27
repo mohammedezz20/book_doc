@@ -4,6 +4,7 @@ import 'package:book_doc/features/profile/presentation/cubit/edit-profile/edit_p
 import 'package:book_doc/features/profile/presentation/pages/edit_profile.dart';
 import 'package:book_doc/features/profile/presentation/widgets/profile_app_bar.dart';
 import 'package:book_doc/features/profile/presentation/widgets/profile_body_widget.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   horizontalSpace(20),
                   Text(
-                    'Personal Information',
+                    S.of(context).Personal_Information,
                     style:
                         TextStyles.font14DarkBlueBold.copyWith(fontSize: 16.sp),
                   ),

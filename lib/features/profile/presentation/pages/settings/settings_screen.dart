@@ -5,6 +5,7 @@ import 'package:book_doc/features/login/presentation/pages/auth_state.dart';
 import 'package:book_doc/features/profile/presentation/cubit/setting/setting_cubit.dart';
 import 'package:book_doc/features/profile/presentation/cubit/setting/setting_state.dart';
 import 'package:book_doc/features/profile/presentation/pages/language/language_screen.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              'Settings',
+              S.of(context).Settings,
               style: TextStyles.font18DarkBlueBold,
             ),
             leading: IconButton(
@@ -60,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         horizontalSpace(20),
                         Text(
-                          'Language',
+                          S.of(context).Language,
                           style: TextStyles.font16DarkBlueMedium,
                         ),
                         const Spacer(),
@@ -83,12 +84,12 @@ class SettingsScreen extends StatelessWidget {
                         context: context,
                         builder: (context) => AlertDialog(
                           title: Text(
-                            'Logout',
+                            S.of(context).Logout,
                             style: TextStyles.font16DarkBlueMedium,
                           ),
                           backgroundColor: Colors.white,
                           content: Text(
-                            'Are you sure you want to logout?',
+                            S.of(context).Are_you_sure_you_want_to_logout,
                             style: TextStyles.font12DarkBlueRegular,
                           ),
                           actions: [
@@ -99,7 +100,7 @@ class SettingsScreen extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text('Cancel',
+                                  child: Text(S.of(context).Cancel,
                                       style: TextStyles.font16DarkBlueMedium
                                           .copyWith(
                                               color: ColorsManager.mainBlue)),
@@ -122,7 +123,7 @@ class SettingsScreen extends StatelessWidget {
                                     // );
                                   },
                                   child: Text(
-                                    'Logout',
+                                    S.of(context).Logout,
                                     style: TextStyles.font16DarkBlueMedium
                                         .copyWith(color: Colors.red),
                                   ),
@@ -138,7 +139,7 @@ class SettingsScreen extends StatelessWidget {
                         SvgPicture.asset(AppVector.logout),
                         horizontalSpace(20),
                         Text(
-                          'Logout',
+                          S.of(context).Logout,
                           style: TextStyles.font16DarkBlueMedium,
                         ),
                         const Spacer(),
@@ -166,8 +167,8 @@ class SettingsScreen extends StatelessWidget {
                 );
               } else if (state is SignOutSuccessState) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Signed out successfully'),
+                  SnackBar(
+                    content: Text(S.of(context).Signed_out_successfully),
                   ),
                 );
                 Navigator.pushReplacement(

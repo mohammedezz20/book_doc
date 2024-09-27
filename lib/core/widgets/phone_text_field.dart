@@ -1,3 +1,4 @@
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -9,13 +10,13 @@ class CustomPhoneTextField extends StatelessWidget {
   CustomPhoneTextField({super.key, required this.controller});
 
   final TextEditingController controller;
-  final PhoneNumber number = PhoneNumber(isoCode: 'EG');
+  final PhoneNumber number = PhoneNumber(isoCode: "EG");
   @override
   Widget build(BuildContext context) {
     return InternationalPhoneNumberInput(
       inputDecoration: InputDecoration(
         filled: true,
-        hintText: 'WhatsApp Number',
+        hintText: S.of(context).WhatsApp_Number,
         hintStyle: TextStyles.font14LightGrayRegular,
         fillColor: ColorsManager.moreLightGray,
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
@@ -80,7 +81,7 @@ class CustomPhoneTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0.r),
         ),
         suffixIcon: const Icon(Icons.search),
-        hintText: "Search country",
+        hintText: S.of(context).Search_country,
         hintStyle: TextStyles.font14LightGrayRegular,
         fillColor: ColorsManager.moreLightGray,
       ),

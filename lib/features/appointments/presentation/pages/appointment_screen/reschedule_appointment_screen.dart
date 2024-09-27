@@ -1,6 +1,7 @@
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/summary_appointment_screen.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/date&time_widget.dart';
 import 'package:book_doc/features/appointments/presentation/pages/appointment_screen/widgets/steps_list.dart';
+import 'package:book_doc/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,7 @@ class RescheduleAppointmentScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Reschedule Appointment',
+          S.of(context).Reschedule_Appointment,
           style: TextStyles.font18DarkBlueBold,
         ),
         centerTitle: true,
@@ -44,7 +45,7 @@ class RescheduleAppointmentScreen extends StatelessWidget {
               DateAndTimeWidget(appointment: appointment),
               verticalSpace(20),
               AppTextButton(
-                buttonText: 'Continue',
+                buttonText: S.of(context).Continue,
                 onPressed: () {
                   Navigator.push(
                     context,
